@@ -1,0 +1,35 @@
+AppBundle\Entity\Post:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\PostRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: true
+        description:
+            type: string
+            length: 255
+            nullable: true
+        lastUpdate:
+            type: datetime
+        numberOfLikes:
+            type: integer
+        numberOfFavorites:
+            type: integer
+        published:
+            type: boolean
+    oneToOne:
+        content:
+            targetEntity: AppBundle\Entity\Content
+            inversedBy: post
+            cascade: [ persist, remove ]
+            joinColumn:
+                nullable: false
+    lifecycleCallbacks: {  }

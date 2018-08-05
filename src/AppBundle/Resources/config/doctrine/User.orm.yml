@@ -1,0 +1,34 @@
+AppBundle\Entity\User:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        username:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+        password:
+            type: string
+            length: 255
+        salt:
+            type: string
+            length: 255
+        roles:
+            type: array
+        enabled:
+            type: boolean
+        token:
+            type: string
+            length: 255
+    oneToOne:
+        setting:
+            targetEntity: AppBundle\Entity\Setting
+            cascade: [ persist ]

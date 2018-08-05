@@ -1,0 +1,7 @@
+app_admin_post_creation:
+    resource: "creation.yml"
+    prefix:   /creation/
+
+app_admin_post_listing:
+    resource: "listing.yml"
+    prefix:   /listing/

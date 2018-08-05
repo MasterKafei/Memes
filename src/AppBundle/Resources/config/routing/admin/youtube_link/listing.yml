@@ -1,0 +1,3 @@
+app_admin_youtube_link_listing_list_youtube_link:
+    path:   /list_youtube_link/
+    defaults: { _controller: 'AppBundle:Admin\YoutubeLink\Listing:listYoutubeLink' }

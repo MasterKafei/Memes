@@ -1,0 +1,3 @@
+app_admin_post_listing_list_post:
+    path: /list_post/
+    defaults: { _controller: 'AppBundle:Admin\Post\Listing:listPost' }

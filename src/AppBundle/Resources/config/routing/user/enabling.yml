@@ -1,0 +1,5 @@
+app_user_enabling_enable:
+    path:   /enable/{id}/{token}
+    defaults: { _controller: 'AppBundle:User\Enabling:enableUser' }
+    requirements:
+        id: \d+

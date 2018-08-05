@@ -1,0 +1,3 @@
+app_uploaded_downloading:
+    resource: "downloading.yml"
+    prefix:   /downloading/

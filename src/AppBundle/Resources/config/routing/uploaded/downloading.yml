@@ -1,0 +1,5 @@
+app_uploaded_downloading_download_uploaded:
+    path: /download_content/{id}
+    defaults: { _controller: 'AppBundle:Uploaded\Downloading:downloadContent' }
+    requirements:
+        id: \d+

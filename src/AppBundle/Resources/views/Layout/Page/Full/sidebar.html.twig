@@ -1,0 +1,103 @@
+<div class="navigation-area-collapse" id="navigation-area-collapse">
+    <i class="fas fa-bars" onclick="mobile_nav('open');"></i>
+    <h1>Memes</h1>
+</div>
+<div class="navigation-area" id="navigation-area">
+    <div class="logo-icon">
+        <div id="logo-circle">
+            <span id="logo">M</span>
+        </div>
+    </div>
+    <div class="logo-text">
+        <div id="content">
+            <h1>Memes</h1>
+            <span class="small">It's a fun world by here</span>
+            <h2>Menu</h2>
+        </div>
+        <i class="fas fa-times" id="mobile-close" onclick="mobile_nav('close')"></i>
+    </div>
+    <div class="menu-zone">
+        <div class="item-sorted">
+            <a href="{{ path('app_home_list', {'category': 'latest'}) }}">
+                <div class="item" id="new">
+                    <i class="fas fa-birthday-cake fa-fw"></i>
+                    <span>Newest</span>
+                </div>
+            </a>
+            <a href="{{ path('app_home_list', {'category': 'like'}) }}">
+                <div class="item" id="hot">
+                    <i class="fas fa-fire fa-fw"></i>
+                    <span>Hot</span>
+                </div>
+            </a>
+            <a href="{{ path('app_home_list', {'category': 'rise'}) }}">
+                <div class="item" id="rising">
+                    <i class="fas fa-arrow-up fa-fw"></i>
+                    <span>Rising</span>
+                </div>
+            </a>
+            <a href="{{ path('app_home_list', {'category': 'favorite'}) }}">
+                <div class="item" id="favorite">
+                    <i class="fas fa-star fa-fw"></i>
+                    <span>Favorited</span>
+                </div>
+            </a>
+        </div>
+        <div class="item-social">
+            <div class="item" id="facebook">
+                <i class="fab fa-facebook fa-fw"></i>
+                <span>Facebook</span>
+            </div>
+            <div class="item" id="twitter">
+                <i class="fab fa-twitter fa-fw"></i>
+                <span>Twitter</span>
+            </div>
+            <div class="item" id="instagram">
+                <i class="fab fa-instagram fa-fw"></i>
+                <span>Instagram</span>
+            </div>
+        </div>
+        <div class="item-settings">
+            <div class="item" id="settings" onclick="settings_nav('open')">
+                <i class="fas fa-cogs fa-fw"></i>
+                <span> Settings</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="settings-area" id="settings-area">
+    <div class="header-text">
+        <div id="content">
+            <h2>General
+                <br> Settings</h2>
+        </div>
+        <i class="fas fa-times" id="close" onclick="settings_nav('close')"></i>
+    </div>
+    <div class="menu-zone">
+        <div class="item" id="nbEleLine">
+            <h1>Number of elements by line :</h1>
+            <div class="choice-list mobile-disabled">
+                <span class="choice-item" id="line-4" onclick="changeNbLine(6, 'line-4')">6</span>
+                <span class="choice-item" id="line-3" onclick="changeNbLine(5, 'line-3')">5</span>
+                <span class="choice-item" id="line-2" onclick="changeNbLine(4, 'line-2')">4</span>
+                <span class="choice-item" id="line-1" onclick="changeNbLine(3, 'line-1')">3</span>
+                <span class="choice-item" id="line-0" onclick="changeNbLine(2, 'line-0')">2</span>
+            </div>
+            <span class="mobile-disabled-msg">This option is not available on mobile</span>
+        </div>
+        <div class="item">
+            <h1>Number of elements by page :</h1>
+            <div class="choice-list">
+                <span class="choice-item" id="items-4" onclick="changeNbitems(6, 'items-4')">400</span>
+                <span class="choice-item" id="items-3" onclick="changeNbitems(5, 'items-3')">200</span>
+                <span class="choice-item" id="items-2" onclick="changeNbitems(4, 'items-2')">100</span>
+                <span class="choice-item" id="items-1" onclick="changeNbitems(3, 'items-1')">50</span>
+            </div>
+        </div>
+        <div class="item">
+            <h1>Save code :</h1>
+            <p>Use this code to import your settings</p>
+            <span class="color-primary">254978620</span>
+        </div>
+    </div>
+</div>

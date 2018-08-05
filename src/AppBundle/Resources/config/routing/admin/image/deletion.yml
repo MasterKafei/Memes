@@ -1,0 +1,5 @@
+app_admin_image_deletion_delete_image:
+  path: /delete_image/{id}
+  defaults: { _controller: 'AppBundle:Admin\Image\Deletion:deleteImage' }
+  requirements:
+    id: \d+

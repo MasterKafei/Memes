@@ -1,0 +1,12 @@
+services:
+    app.mailer.abstract_mailer:
+        abstract: true
+        calls:
+        - [setTwig, ["@twig"]]
+        - [setMailer, ["@swiftmailer.mailer"]]
+        - [setRouter, ["@router"]]
+        - [setParams, ["%mailer_params%"]]
+
+    app.mailer.user.registration:
+        class: AppBundle\Service\Mailer\User\RegistrationMailer
+        parent: app.mailer.abstract_mailer

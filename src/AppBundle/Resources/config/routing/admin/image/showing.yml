@@ -1,0 +1,5 @@
+app_admin_image_showing_show_image:
+  path: /show_image/{id}
+  defaults: { _controller: 'AppBundle:Admin\Image\Showing:showImage' }
+  requirements:
+    id: \d+

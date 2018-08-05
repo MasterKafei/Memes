@@ -1,0 +1,19 @@
+app_admin_image_creation:
+  resource: "creation.yml"
+  prefix:   /creation/
+
+app_admin_image_deletion:
+  resource: "deletion.yml"
+  prefix:   /deletion/
+
+app_admin_image_edition:
+  resource: "edition.yml"
+  prefix:   /edition/
+
+app_admin_image_listing:
+  resource: "listing.yml"
+  prefix:   /listing/
+
+app_admin_image_showing:
+  resource: "showing.yml"
+  prefix:   /showing/

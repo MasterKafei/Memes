@@ -1,0 +1,5 @@
+app_admin_video_deletion_delete_video:
+  path: /delete_video/{id}
+  defaults: { _controller: 'AppBundle:Admin\Video\Deletion:deleteVideo' }
+  requirements:
+    id: \d+

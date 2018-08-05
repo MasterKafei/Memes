@@ -1,0 +1,11 @@
+{% extends '@Layout/Page/Admin/base.html.twig' %}
+
+{% block body %}
+    <div>
+        <p>{{ video.name }}</p>
+        <p>{{ video.description }}</p>
+        <video>
+            <source src="{{ vich_uploader_asset(video, 'file') }}">
+        </video>
+    </div>
+{% endblock body %}

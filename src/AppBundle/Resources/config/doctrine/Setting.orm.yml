@@ -1,0 +1,20 @@
+AppBundle\Entity\Setting:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\SettingRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        numberByLine:
+            type: integer
+        numberByPage:
+            type: integer
+        importCode:
+            type: integer
+            unique: true
+            nullable: true
+    lifecycleCallbacks: {  }

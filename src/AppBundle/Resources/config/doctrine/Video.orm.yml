@@ -1,0 +1,4 @@
+AppBundle\Entity\Video:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\VideoRepository

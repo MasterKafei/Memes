@@ -1,0 +1,6 @@
+<h1 class="section-title">Newest</h1>
+<div class="card-columns" id="card-container">
+    {% for content in contents %}
+        {% include '@Layout/Widget/Content/base.html.twig' with {'content': content} %}
+    {% endfor %}
+</div>

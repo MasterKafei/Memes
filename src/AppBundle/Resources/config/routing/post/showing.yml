@@ -1,0 +1,5 @@
+app_post_showing_show_post:
+    path:   /show_post/{id}
+    defaults: { _controller: 'AppBundle:Post\Showing:showPost' }
+    requirements:
+        id: \d+

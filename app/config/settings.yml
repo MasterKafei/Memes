@@ -1,0 +1,4 @@
+parameters:
+    mailer_params:
+        sender_address: meme@dyosis.com
+        sender_name: 'Meme'

@@ -1,0 +1,11 @@
+app_admin_post_creation_create_image_post:
+    path: /create_post/image
+    defaults: { _controller: 'AppBundle:Admin\Post\Creation:createImagePost' }
+
+app_admin_post_creation_create_video_post:
+    path: /create_post/video
+    defaults: { _controller: 'AppBundle:Admin\Post\Creation:createVideoPost' }
+
+app_admin_post_creation_create_youtube_link_post:
+    path: /create_post/youtube_link
+    defaults: { _controller: 'AppBundle:Admin\Post\Creation:createYoutubeLink' }

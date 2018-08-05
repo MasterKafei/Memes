@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-img-btn">
+        {% if post.content is image %}
+            {% include '@Layout/Widget/Image/base.html.twig' with {'image': post.content} %}
+        {% elseif post.content is video %}
+            {% include '@Layout/Widget/Video/base.html.twig' with {'video': post.content} %}
+        {% elseif post.content is youtube_link %}
+            {% include '@Layout/Widget/YoutubeLink/base.html.twig' with {'youtube_link': post.content} %}
+        {% endif %}
+        <div class="card-buttons">
+            <a class="card-button">
+                <i class="far fa-heart fa-fw" id="heart"></i>
+            </a>
+            <a class="card-button">
+                <i class="far fa-star fa-fw" id="star"></i>
+            </a>
+            <a class="card-button" onclick="share_modal('open', '#', '#', '#', '#', '{{ absolute_url(path('app_post_showing_show_post', {'id': post.id})) }}')">
+                <i class="fas fa-share fa-fw" id="share"></i>
+            </a>
+        </div>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted">Appeared {{ post.lastUpdate|diffDateTime }} ago &nbsp;|&nbsp; </small>
+        <small class="text-muted">
+            <i class="fas fa-heart"></i> {{ post.numberOfLikes|resizeNumber }} &nbsp;|&nbsp;
+            <i class="fas fa-star"></i> {{ post.numberOfFavorites|resizeNumber }}
+        </small>
+    </div>
+</div>

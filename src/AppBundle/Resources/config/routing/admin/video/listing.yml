@@ -1,0 +1,3 @@
+app_admin_video_listing_list_video:
+  path: /list_video/
+  defaults: { _controller: 'AppBundle:Admin\Video\Listing:listVideo' }

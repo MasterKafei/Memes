@@ -1,0 +1,9 @@
+AppBundle\Entity\Link:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\LinkRepository
+    fields:
+        uri:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

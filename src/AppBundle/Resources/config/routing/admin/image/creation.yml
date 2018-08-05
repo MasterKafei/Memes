@@ -1,0 +1,3 @@
+app_admin_image_creation_create_image:
+  path: /create_image/
+  defaults: { _controller: 'AppBundle:Admin\Image\Creation:createImage' }

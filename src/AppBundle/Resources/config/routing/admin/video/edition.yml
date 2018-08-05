@@ -1,0 +1,5 @@
+app_admin_video_edition_edit_video:
+  path: /edit_video/{id}
+  defaults: { _controller: 'AppBundle:Admin\Video\Edition:editVideo' }
+  requirements:
+    id: \d+

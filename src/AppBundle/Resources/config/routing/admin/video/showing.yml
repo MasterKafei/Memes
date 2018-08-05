@@ -1,0 +1,5 @@
+app_admin_video_showing_show_video:
+  path: /show_video/{id}
+  defaults: { _controller: 'AppBundle:Admin\Video\Showing:showVideo' }
+  requirements:
+    id: \d+

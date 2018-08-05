@@ -1,0 +1,13 @@
+{% extends '@Layout/Page/Full/base.html.twig' %}
+
+{% block body %}
+    {% if category == 'latest' %}
+        {{ render(controller('AppBundle\\Controller\\Post\\ListingController:listMostLatestPostAction')) }}
+    {% elseif category == 'like' %}
+        {{ render(controller('AppBundle\\Controller\\Post\\ListingController:listMostLikedPostAction')) }}
+    {% elseif category == 'favorite' %}
+        {{ render(controller('AppBundle\\Controller\\Post\\ListingController:listMostFavoritePostAction')) }}
+    {% elseif category == 'rise' %}
+        {{ render(controller('AppBundle\\Controller\\Post\\ListingController:listMostRisingPostAction')) }}
+    {% endif %}
+{% endblock body %}

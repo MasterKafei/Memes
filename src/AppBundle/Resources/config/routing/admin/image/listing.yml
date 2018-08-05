@@ -1,0 +1,3 @@
+app_admin_image_listing_list_image:
+  path: /list_image/
+  defaults: { _controller: 'AppBundle:Admin\Image\Listing:listImage' }

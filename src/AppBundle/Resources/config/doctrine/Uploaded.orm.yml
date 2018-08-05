@@ -1,0 +1,9 @@
+AppBundle\Entity\Uploaded:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\UploadedRepository
+    oneToOne:
+        file:
+            targetEntity: AppBundle\Entity\File
+            cascade: [ persist, remove ]
+    lifecycleCallbacks: {  }

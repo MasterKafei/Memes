@@ -1,0 +1,19 @@
+app_admin:
+    resource: "admin/all.yml"
+    prefix:   /admin/
+
+app_post:
+    resource: "post/all.yml"
+    prefix:   /post/
+
+app_uploaded:
+    resource: "uploaded/all.yml"
+    prefix:   /uploaded/
+
+app_user:
+    resource: "user/all.yml"
+    prefix:   /user/
+
+app_home:
+    resource: "home.yml"
+    prefix:   /

@@ -1,0 +1,26 @@
+{% extends '@Layout/Page/Default/base.html.twig' %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="description" content="Memes Website">
+    <meta name="keywords" content="Memes,Design">
+    <meta name="author" content="Craaftx - Dorian Guilmain">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}Home{% endblock title %}
+    </title>
+    {% include '@Layout/Page/Full/stylesheets.html.twig' %}
+    {% block stylesheets %}{% endblock stylesheets %}
+{% endblock head %}
+
+{% block html_body %}
+    <body onresize="patch_watcher('true', 'true')" id="website-body">
+    {% include '@Layout/Page/Full/sidebar.html.twig' %}
+    <div class="website-wrapper" id="website-wrapper">
+            {% block body %}{% endblock body %}
+    </div>
+    {% include '@Layout/Page/Full/footer.html.twig' %}
+    </body>
+    {% include '@Layout/Page/Full/scripts.html.twig' %}
+    {% block scripts %}{% endblock scripts %}
+{% endblock html_body %}

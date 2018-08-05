@@ -1,0 +1,15 @@
+app_admin_image:
+    resource: "image/all.yml"
+    prefix:   /image/
+
+app_admin_creation:
+    resource: "post/all.yml"
+    prefix:   /post/
+
+app_admin_video:
+    resource: "video/all.yml"
+    prefix:   /video/
+
+app_admin_youtube_link:
+    resource: "youtube_link/all.yml"
+    prefix:   /youtube_link/

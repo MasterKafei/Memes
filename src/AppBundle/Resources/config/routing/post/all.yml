@@ -1,0 +1,3 @@
+app_post_showing:
+    prefix: /showing/
+    resource: "showing.yml"

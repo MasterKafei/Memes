@@ -1,0 +1,25 @@
+<div class="share-modal" id="share-modal">
+    <div class="share-modal-content">
+        <h1> Share </h1>
+        <i class="fa fa-times" onclick="share_modal('close')"></i>
+        <div class="share-buttons">
+            <a id="modal_facebook_link" href="" class="fab fa-facebook fa-fw"></a>
+            <a id="modal_twitter_link" href="" class="fab fa-twitter fa-fw"></a>
+            <a id="modal_instagram_link" href="" class="fab fa-instagram fa-fw"></a>
+            <a id="modal_discord_link" href="" class="fab fa-discord fa-fw"></a>
+        </div>
+        <div class="share-link">
+            <p id="modal_absolute_link"></p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <h1 class="section-title">{{ category|default('Newest') }}</h1>
+</div>
+<div class="container-fluid">
+    <div class="card-columns" id="card-container">
+        {% for post in posts %}
+            {% include '@Layout/Widget/Post/Minimize/base.html.twig' with {'post': post} %}
+        {% endfor %}
+    </div>
+</div>

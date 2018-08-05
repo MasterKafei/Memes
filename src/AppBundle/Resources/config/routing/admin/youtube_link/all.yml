@@ -1,0 +1,11 @@
+app_admin_youtube_link_creation:
+    resource: "creation.yml"
+    prefix:   /creation/
+
+app_admin_youtube_link_edition:
+    resource: "edition.yml"
+    prefix:   /edition/
+
+app_admin_youtube_link_listing:
+    resource: "listing.yml"
+    prefix:   /listing/

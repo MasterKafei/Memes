@@ -1,0 +1,26 @@
+AppBundle\Entity\Content:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ContentRepository
+    inheritanceType: JOINED
+    discriminatorColumn:
+        name: discr
+        type: string
+    discriminatorMap:
+        uploaded:  Uploaded
+        image: Image
+        video: Video
+        link:  Link
+        youtube_link: YoutubeLink
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    oneToOne:
+        post:
+            targetEntity: AppBundle\Entity\Post
+            mappedBy: content
+            cascade: [ persist, remove ]
+    lifecycleCallbacks: {  }

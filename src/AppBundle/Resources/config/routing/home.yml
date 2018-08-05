@@ -1,0 +1,9 @@
+app_home_home:
+    path: /
+    defaults: { _controller: 'AppBundle:Home:home' }
+
+app_home_list:
+    path: /{category}
+    defaults: { _controller: 'AppBundle:Home:home' }
+    requirements:
+        category: "latest|like|favorite|rise"

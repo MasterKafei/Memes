@@ -1,0 +1,19 @@
+app_admin_video_creation:
+  resource: "creation.yml"
+  prefix:   /creation/
+
+app_admin_video_deletion:
+  resource: "deletion.yml"
+  prefix:   /deletion/
+
+app_admin_video_edition:
+  resource: "edition.yml"
+  prefix:   /edition/
+
+app_admin_video_listing:
+  resource: "listing.yml"
+  prefix:   /listing/
+
+app_admin_video_showing:
+  resource: "showing.yml"
+  prefix:   /showing/

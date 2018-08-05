@@ -1,0 +1,5 @@
+app_admin_youtube_link_edition_edit_youtube_link:
+    path:   /edit_youtube_link/{id}
+    defaults: { _controller: 'AppBundle:Admin\YoutubeLink\Edition:editYoutubeLink' }
+    requirements:
+        id: \d+

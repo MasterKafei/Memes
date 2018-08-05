@@ -1,0 +1,5 @@
+app_admin_image_edition_edit_image:
+  path: /edit_image/{id}
+  defaults: { _controller: 'AppBundle:Admin\Image\Edition:editImage' }
+  requirements:
+    id: \d+

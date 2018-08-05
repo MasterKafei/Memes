@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% block html %}
+<html>
+{% block html_head %}
+    <head>
+        {% block head %}
+            <title>{% block title %}{% endblock title %}</title>
+            {% include '@Layout/Page/Default/stylesheets.html.twig' %}
+            {% block stylesheets %}{% endblock stylesheets %}
+        {% endblock head %}
+    </head>
+{% endblock html_head %}
+
+{% block html_body %}
+    <body>
+    {% block body %}{% endblock body %}
+    {% include '@Layout/Page/Default/scripts.html.twig' %}
+    {% block scripts %}{% endblock scripts %}
+    </body>
+{% endblock html_body %}
+</html>
+{% endblock html %}
