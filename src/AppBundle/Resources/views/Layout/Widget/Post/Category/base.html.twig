@@ -1,0 +1,56 @@
+<h1 class="section-title">
+    <i class="fas fa-fire fa-fw"></i> {% include '@Layout/Widget/Post/Category/Name/base.html.twig' with {'key': key} %}
+</h1>
+
+{% set hot_category_name = constant('AppBundle\\Controller\\Post\\ListingController::HOT_CATEGORY_NAME') %}
+{% set rise_category_name = constant('AppBundle\\Controller\\Post\\ListingController::RISE_CATEGORY_NAME') %}
+{% set favorite_category_name = constant('AppBundle\\Controller\\Post\\ListingController::FAVORITE_CATEGORY_NAME') %}
+
+{% if
+    key == hot_category_name or
+    key == rise_category_name or
+    key == favorite_category_name
+%}
+
+    {% set all_time_key = constant('AppBundle\\Controller\\Post\\ListingController::ALL_TIME_PERIOD_KEY') %}
+    {% set this_year_key = constant('AppBundle\\Controller\\Post\\ListingController::THIS_YEAR_PERIOD_KEY') %}
+    {% set this_month_key = constant('AppBundle\\Controller\\Post\\ListingController::THIS_MONTH_PERIOD_KEY') %}
+    {% set this_week_key = constant('AppBundle\\Controller\\Post\\ListingController::THIS_WEEK_PERIOD_KEY') %}
+    {% set today_key = constant('AppBundle\\Controller\\Post\\ListingController::TODAY_PERIOD_KEY') %}
+
+    {% set period_buttons =
+        [
+            {
+                'path': path('app_home_list', {category: key, period: all_time_key}),
+                'text': 'All time',
+                'period': all_time_key
+            },
+            {
+                'path': path('app_home_list', {category: key, period: this_year_key}),
+                'text': 'This year',
+                'period': this_year_key
+            },
+            {
+                'path': path('app_home_list', {category: key, period: this_month_key}),
+                'text': 'This month',
+                'period': this_month_key
+            },
+            {
+                'path': path('app_home_list', {category: key, period: this_week_key}),
+                'text': 'This week',
+                'period': this_week_key
+            },
+            {
+                'path': path('app_home_list', {category: key, period: today_key}),
+                'text': 'Today',
+                'period': today_key
+            }
+        ] %}
+
+{% endif %}
+
+{% if period_buttons is defined %}
+    {% for period_button in period_buttons %}
+        {% include '@Layout/Widget/Post/Category/PeriodButton/base.html.twig' with {'path': period_button['path'], 'text': period_button['text'], 'period': period_button['period'] } %}
+    {% endfor %}
+{% endif %}

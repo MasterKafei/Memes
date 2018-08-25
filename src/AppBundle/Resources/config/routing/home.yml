@@ -6,4 +6,4 @@ app_home_list:
     path: /{category}
     defaults: { _controller: 'AppBundle:Home:home' }
     requirements:
-        category: "latest|like|favorite|rise"
+        category: 'news|hot|rise|favorite'

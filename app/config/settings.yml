@@ -2,3 +2,5 @@ parameters:
     mailer_params:
         sender_address: meme@dyosis.com
         sender_name: 'Meme'
+    achievement.image.directory.web: 'achievement/image/'
+    achievement.image.directory: '%kernel.project_dir%/web/%achievement.image.directory.web%'

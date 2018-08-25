@@ -1,5 +1,27 @@
 services:
+    app.business.achievement:
+        class: AppBundle\Service\Business\AchievementBusiness
+        parent: app.util.abstract_container_aware
+        public: true
+        arguments:
+            - '%kernel.project_dir%\src\AppBundle\Resources\config\achievements\all.yml'
+
+    app.business.level:
+        class: AppBundle\Service\Business\LevelBusiness
+        parent: app.util.abstract_container_aware
+        public: true
+
+    app.business.request:
+        class: AppBundle\Service\Business\RequestBusiness
+        parent: app.util.abstract_container_aware
+        public: true
+
     app.business.user:
         class: AppBundle\Service\Business\UserBusiness
+        parent: app.util.abstract_container_aware
+        public: true
+
+    app.business.vote:
+        class: AppBundle\Service\Business\VoteBusiness
         parent: app.util.abstract_container_aware
         public: true

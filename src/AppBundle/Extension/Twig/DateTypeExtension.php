@@ -19,6 +19,18 @@ class DateTypeExtension extends \Twig_Extension
         $now = new \DateTime();
         $interval = $datetime->diff($now);
 
+        $years = $interval->y;
+
+        if ($years !== 0) {
+            return $years . ' year' . ($years > 1 ? 's' : '');
+        }
+
+        $months = $interval->m;
+
+        if ($months !== 0) {
+            return $months . ' month' . ($months > 1 ? 's' : '');
+        }
+
         $days = $interval->d;
 
         if ($days !== 0) {

@@ -1,0 +1,7 @@
+{% extends '@Layout/Page/Full/base.html.twig' %}
+
+{% block body %}
+    {% for achievement in achievements %}
+        {{ dump(achievement) }}
+    {% endfor %}
+{% endblock body %}

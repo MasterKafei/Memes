@@ -1,0 +1,16 @@
+app_post_voting_vote_like_post:
+    path:   /vote_like_post/{id}
+    defaults: { _controller: 'AppBundle:Post\Voting:voteLikePost'}
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+
+app_post_voting_vote_favorite_post:
+    path:   /vote_favorite_post/{id}
+    defaults: { _controller: 'AppBundle:Post\Voting:voteFavoritePost'}
+    requirements:
+        id: \d+
+    options:
+        expose: true

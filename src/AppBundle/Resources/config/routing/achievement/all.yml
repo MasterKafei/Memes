@@ -1,0 +1,3 @@
+app_achievement_listing:
+    resource: "listing.yml"
+    prefix: /listing/

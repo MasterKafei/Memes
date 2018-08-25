@@ -1,13 +1,17 @@
 {% extends '@Layout/Page/Full/base.html.twig' %}
 
 {% block body %}
-    {% if category == 'latest' %}
+    {% if category is constant('AppBundle\\Controller\\Post\\ListingController::NEWS_CATEGORY_NAME') %}
         {{ render(controller('AppBundle\\Controller\\Post\\ListingController:listMostLatestPostAction')) }}
-    {% elseif category == 'like' %}
+    {% elseif category is constant('AppBundle\\Controller\\Post\\ListingController::HOT_CATEGORY_NAME') %}
         {{ render(controller('AppBundle\\Controller\\Post\\ListingController:listMostLikedPostAction')) }}
-    {% elseif category == 'favorite' %}
+    {% elseif category is constant('AppBundle\\Controller\\Post\\ListingController::FAVORITE_CATEGORY_NAME') %}
         {{ render(controller('AppBundle\\Controller\\Post\\ListingController:listMostFavoritePostAction')) }}
-    {% elseif category == 'rise' %}
+    {% elseif category is constant('AppBundle\\Controller\\Post\\ListingController::RISE_CATEGORY_NAME') %}
         {{ render(controller('AppBundle\\Controller\\Post\\ListingController:listMostRisingPostAction')) }}
     {% endif %}
 {% endblock body %}
+
+{% block scripts %}
+    <script src="{{ asset('build/js/Post/Listing/list.js') }}"></script>
+{% endblock scripts %}

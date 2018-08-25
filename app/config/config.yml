@@ -10,6 +10,8 @@ parameters:
   locale: en
 
 framework:
+  templating:
+    engines: ['twig']
   #esi: ~
   #translator: { fallbacks: ['%locale%'] }
   secret: '%secret%'
@@ -24,7 +26,7 @@ framework:
   trusted_hosts: ~
   session:
     # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-    handler_id: session.handler.native_file
+    handler_id: session.handler.pdo
     save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
   fragments: ~
   http_method_override: true
@@ -40,6 +42,11 @@ twig:
     "%kernel.project_dir%/src/AppBundle/Resources/views/Layout": Layout
     "%kernel.project_dir%/src/AppBundle/Resources/views/Mail": Mail
     "%kernel.project_dir%/src/AppBundle/Resources/views/Page": Page
+  globals:
+    request_business: '@app.business.request'
+    user_business: '@app.business.user'
+    vote_business: '@app.business.vote'
+    achievement_business: '@app.business.achievement'
 
 # Doctrine Configuration
 doctrine:
@@ -84,3 +91,41 @@ vich_uploader:
             uri_prefix: /uploads/file/
             upload_destination: '%kernel.project_dir%/web/uploads/file/'
             namer: vich_uploader.namer_uniqid
+
+assetic:
+  debug:          '%kernel.debug%'
+  use_controller: '%kernel.debug%'
+  filters:
+    cssrewrite: ~
+
+# Web Socket Configuration
+gos_web_socket:
+  server:
+    host: 127.0.0.1   #The host ip to bind to
+    port: 8080        #The port the socket server will listen on
+    router:
+      resources:
+        - '@AppBundle/Resources/config/routing/topic/all.yml'
+  pushers:
+    zmq:
+      host: 127.0.0.1
+      port: 5555
+      persistent: true
+      protocol: tcp
+  client:
+    firewall: main
+    session_handler: '@session.handler.pdo'
+    storage:
+      driver: '@gos_web_socket.client_storage.driver.redis'
+      decorator: '@gos_web_socket.client_storage.doctrine.decorator'
+
+doctrine_cache:
+  providers:
+    redis_cache:
+      redis:
+        host: 127.0.0.1
+        port: 6379
+        database: 3
+    websocket_cache_client:
+      type: redis
+      alias: gos_web_socket.client_storage.driver.redis

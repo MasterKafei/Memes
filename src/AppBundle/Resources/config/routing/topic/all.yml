@@ -1,0 +1,4 @@
+app_achievement_notify:
+    channel: app/achievement/notify/{socket_session_id}
+    handler:
+        callback: 'app.achievement.notify'

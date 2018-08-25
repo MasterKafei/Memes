@@ -1,19 +1,27 @@
 <div class="card">
     <div class="card-img-btn">
-        {% if post.content is image %}
-            {% include '@Layout/Widget/Image/base.html.twig' with {'image': post.content} %}
-        {% elseif post.content is video %}
-            {% include '@Layout/Widget/Video/base.html.twig' with {'video': post.content} %}
-        {% elseif post.content is youtube_link %}
-            {% include '@Layout/Widget/YoutubeLink/base.html.twig' with {'youtube_link': post.content} %}
-        {% endif %}
+        <a href="{{ path('app_post_showing_show_post', {'id': post.id}) }}">
+            {% include '@Layout/Widget/Content/base.html.twig' with {'content': post.content} %}
+        </a>
         <div class="card-buttons">
-            <a class="card-button">
-                <i class="far fa-heart fa-fw" id="heart"></i>
-            </a>
-            <a class="card-button">
-                <i class="far fa-star fa-fw" id="star"></i>
-            </a>
+            {% if vote_business.userLikeVotePost(post) %}
+                <a class="card-button like-post-ajax-vote" post-id="{{ post.id }}">
+                    <i class="fas fa-heart fa-fw heart" id="icon-like-post-vote-number-{{ post.id }}"></i>
+                </a>
+            {% else %}
+                <a class="card-button like-post-ajax-vote" post-id="{{ post.id }}">
+                    <i class="far fa-heart fa-fw heart" id="icon-like-post-vote-number-{{ post.id }}"></i>
+                </a>
+            {% endif %}
+            {% if vote_business.userFavoriteVotePost(post) %}
+                <a class="card-button favorite-post-ajax-vote" post-id="{{ post.id }}">
+                    <i class="fas fa-star fa-fw star" id="icon-favorite-post-vote-number-{{ post.id }}"></i>
+                </a>
+            {% else %}
+                <a class="card-button favorite-post-ajax-vote" post-id="{{ post.id }}">
+                    <i class="far fa-star fa-fw star" id="icon-favorite-post-vote-number-{{ post.id }}"></i>
+                </a>
+            {% endif %}
             <a class="card-button" onclick="share_modal('open', '#', '#', '#', '#', '{{ absolute_url(path('app_post_showing_show_post', {'id': post.id})) }}')">
                 <i class="fas fa-share fa-fw" id="share"></i>
             </a>
@@ -22,8 +30,8 @@
     <div class="card-footer">
         <small class="text-muted">Appeared {{ post.lastUpdate|diffDateTime }} ago &nbsp;|&nbsp; </small>
         <small class="text-muted">
-            <i class="fas fa-heart"></i> {{ post.numberOfLikes|resizeNumber }} &nbsp;|&nbsp;
-            <i class="fas fa-star"></i> {{ post.numberOfFavorites|resizeNumber }}
+            <i class="fas fa-heart"></i><i id="like-post-vote-number-{{ post.id }}">{{ post.likeVotes|length|resizeNumber }}</i>&nbsp;|&nbsp;
+            <i class="fas fa-star"></i><i id="favorite-post-vote-number-{{ post.id }}">{{ post.favoriteVotes|length|resizeNumber }}</i>
         </small>
     </div>
 </div>

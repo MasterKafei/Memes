@@ -16,11 +16,23 @@
 {% block html_body %}
     <body onresize="patch_watcher('true', 'true')" id="website-body">
     {% include '@Layout/Page/Full/sidebar.html.twig' %}
+    {% include '@Layout/Widget/Profile/Modal/base.html.twig' %}
     <div class="website-wrapper" id="website-wrapper">
             {% block body %}{% endblock body %}
     </div>
     {% include '@Layout/Page/Full/footer.html.twig' %}
-    </body>
     {% include '@Layout/Page/Full/scripts.html.twig' %}
     {% block scripts %}{% endblock scripts %}
+    {{ ws_client() }}
+    <script type="text/javascript">
+        var _WS_URI = "ws://{{ gos_web_socket_server_host }}:{{ gos_web_socket_server_port }}";
+        var webSocket = WS.connect(_WS_URI);
+
+        webSocket.on("socket/connect", function(session){
+            session.subscribe("app/achievement/notify/{{ user_business.socketSessionId }}", function(uri, payload){
+                document.getElementById('website-wrapper').insertAdjacentHTML('beforeend', payload);
+            });
+        })
+    </script>
+    </body>
 {% endblock html_body %}

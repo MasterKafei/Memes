@@ -33,14 +33,14 @@ class Post
     private $lastUpdate;
 
     /**
-     * @var int
+     * @var LikeVote[]
      */
-    private $numberOfLikes;
+    private $likeVotes;
 
     /**
-     * @var int
+     * @var FavoriteVote[]
      */
-    private $numberOfFavorites;
+    private $favoriteVotes;
 
     /**
      * @var bool
@@ -154,51 +154,51 @@ class Post
     }
 
     /**
-     * Set numberOfLikes.
+     * Set likeVotes.
      *
-     * @param int $numberOfLikes
+     * @param LikeVote[] $likeVotes
      *
      * @return Post
      */
-    public function setNumberOfLikes($numberOfLikes)
+    public function setLikeVotes($likeVotes)
     {
-        $this->numberOfLikes = $numberOfLikes;
+        $this->likeVotes = $likeVotes;
 
         return $this;
     }
 
     /**
-     * Get numberOfLikes.
+     * Get likeVotes.
      *
-     * @return int
+     * @return LikeVote[]
      */
-    public function getNumberOfLikes()
+    public function getLikeVotes()
     {
-        return $this->numberOfLikes;
+        return $this->likeVotes;
     }
 
     /**
-     * Set numberOfFavorites.
+     * Set favoriteVotes.
      *
-     * @param int $numberOfFavorites
+     * @param FavoriteVote[] $favoriteVotes
      *
      * @return Post
      */
-    public function setNumberOfFavorites($numberOfFavorites)
+    public function setFavoriteVotes($favoriteVotes)
     {
-        $this->numberOfFavorites = $numberOfFavorites;
+        $this->favoriteVotes = $favoriteVotes;
 
         return $this;
     }
 
     /**
-     * Get numberOfFavorites.
+     * Get favoriteVotes.
      *
-     * @return int
+     * @return FavoriteVote[]
      */
-    public function getNumberOfFavorites()
+    public function getFavoriteVotes()
     {
-        return $this->numberOfFavorites;
+        return $this->favoriteVotes;
     }
 
     /**

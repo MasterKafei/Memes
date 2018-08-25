@@ -1,10 +1,14 @@
-app_admin_image:
-    resource: "image/all.yml"
-    prefix:   /image/
+app_admin_achievement:
+    resource: "achievement/all.yml"
+    prefix:   /achievement/
 
 app_admin_creation:
     resource: "post/all.yml"
     prefix:   /post/
+
+app_admin_image:
+    resource: "image/all.yml"
+    prefix:   /image/
 
 app_admin_video:
     resource: "video/all.yml"

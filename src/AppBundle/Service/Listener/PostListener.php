@@ -2,7 +2,6 @@
 
 namespace AppBundle\Service\Listener;
 
-
 use AppBundle\Entity\Post;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
@@ -26,7 +25,6 @@ class PostListener
 
     private function initPostStats(Post $post)
     {
-        $post->setNumberOfFavorites(0);
-        $post->setNumberOfLikes(0);
+
     }
 }

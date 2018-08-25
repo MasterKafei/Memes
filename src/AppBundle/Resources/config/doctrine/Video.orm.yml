@@ -2,3 +2,9 @@ AppBundle\Entity\Video:
     type: entity
     table: null
     repositoryClass: AppBundle\Repository\VideoRepository
+    oneToOne:
+        thumbnail:
+            targetEntity: AppBundle\Entity\Image
+            cascade: [ persist, remove ]
+            joinColumn:
+                nullable: true

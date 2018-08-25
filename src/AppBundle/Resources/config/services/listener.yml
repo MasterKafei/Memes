@@ -1,6 +1,18 @@
 services:
-  app.listener.affiliation:
+  app.listener.post:
     class: AppBundle\Service\Listener\PostListener
     tags:
-    - { name: doctrine.orm.entity_listener, entity: AppBundle\Entity\Post, event: prePersist }
-    - { name: doctrine.orm.entity_listener, entity: AppBundle\Entity\Post, event: preUpdate }
+      - { name: doctrine.orm.entity_listener, entity: AppBundle\Entity\Post, event: prePersist }
+      - { name: doctrine.orm.entity_listener, entity: AppBundle\Entity\Post, event: preUpdate }
+
+  app.listener.achievement.like_vote:
+    class: AppBundle\Service\Listener\Achievement\LikeVoteListener
+    parent: app.util.abstract_container_aware
+    tags:
+      - { name: doctrine.orm.entity_listener, entity: AppBundle\Entity\LikeVote, event: postPersist }
+
+  app.listener.achievement.favorite_vote:
+    class: AppBundle\Service\Listener\Achievement\FavoriteVoteListener
+    parent: app.util.abstract_container_aware
+    tags:
+      - { name: doctrine.orm.entity_listener, entity: AppBundle\Entity\FavoriteVote, event: postPersist }

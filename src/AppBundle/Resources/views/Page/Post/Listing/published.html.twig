@@ -14,7 +14,7 @@
     </div>
 </div>
 <div class="container-fluid">
-    <h1 class="section-title">{{ category|default('Newest') }}</h1>
+    {% include '@Layout/Widget/Post/Category/base.html.twig' with {'key': category} %}
 </div>
 <div class="container-fluid">
     <div class="card-columns" id="card-container">

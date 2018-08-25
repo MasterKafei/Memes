@@ -1,0 +1,12 @@
+AppBundle\Entity\FavoriteVote:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\FavoriteVoteRepository
+    manyToOne:
+        post:
+            targetEntity: AppBundle\Entity\Post
+            inversedBy: favoriteVotes
+            joinColumn:
+                name: favorite_post_id
+                referencedColumnName: id
+    lifecycleCallbacks: {}

@@ -1,0 +1,7 @@
+services:
+    app.topic.test_topic:
+
+        class: AppBundle\Service\Topic\TestTopic
+        parent: app.util.abstract_container_aware
+        tags:
+            - { name: gos_web_socket.topic }

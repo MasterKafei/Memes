@@ -1,27 +1,7 @@
-<div class="card">
-    <div class="card-img-btn">
-        {% if content is image %}
-            {% include '@Layout/Widget/Image/base.html.twig' with {'image': content} %}
-        {% elseif content is video %}
-            {% include '@Layout/Widget/Video/base.html.twig' with {'video': content} %}
-        {% endif %}
-        <div class="card-buttons">
-            <a class="card-button">
-                <i class="far fa-heart fa-fw" id="heart"></i>
-            </a>
-            <a class="card-button">
-                <i class="far fa-star fa-fw" id="star"></i>
-            </a>
-            <a class="card-button">
-                <i class="fas fa-share fa-fw" id="share"></i>
-            </a>
-        </div>
-    </div>
-    <div class="card-footer">
-        <small class="text-muted">Appeared 3 mins ago &nbsp;|&nbsp; </small>
-        <small class="text-muted">
-            <i class="fas fa-heart" style="color: brown"></i> 52k &nbsp;|&nbsp;
-            <i class="fas fa-star" style="color: goldenrod"></i> 15k
-        </small>
-    </div>
-</div>
+{% if content is image %}
+    {% include '@Layout/Widget/Image/base.html.twig' with {'image': content} %}
+{% elseif content is video %}
+    {% include '@Layout/Widget/Video/Minimize/base.html.twig' with {'video': content} %}
+{% elseif content is youtube_link %}
+    {% include '@Layout/Widget/YoutubeLink/Minimize/base.html.twig' with {'youtube_link': content} %}
+{% endif %}

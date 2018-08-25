@@ -19,17 +19,21 @@ AppBundle\Entity\Post:
             nullable: true
         lastUpdate:
             type: datetime
-        numberOfLikes:
-            type: integer
-        numberOfFavorites:
-            type: integer
         published:
             type: boolean
     oneToOne:
         content:
             targetEntity: AppBundle\Entity\Content
-            inversedBy: post
             cascade: [ persist, remove ]
             joinColumn:
                 nullable: false
+    oneToMany:
+        likeVotes:
+            targetEntity: AppBundle\Entity\LikeVote
+            mappedBy: post
+            cascade: [ persist, remove ]
+        favoriteVotes:
+            targetEntity: AppBundle\Entity\FavoriteVote
+            mappedBy: post
+            cascade: [ persist, remove ]
     lifecycleCallbacks: {  }

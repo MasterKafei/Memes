@@ -1,0 +1,4 @@
+app_level_configuration_default:
+    avatar_border: '@Layout\Widget\User\Level\Border\default.html.twig'
+    level: 0
+    avatars: {}

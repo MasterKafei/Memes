@@ -1,3 +1,7 @@
 app_post_showing:
     prefix: /showing/
     resource: "showing.yml"
+
+app_post_voting:
+    prefix: /voting/
+    resource: "voting.yml"

@@ -1,0 +1,3 @@
+app_admin_achievement_edition:
+    resource: "edition.yml"
+    prefix:   /edition/

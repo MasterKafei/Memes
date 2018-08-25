@@ -28,7 +28,22 @@ AppBundle\Entity\User:
         token:
             type: string
             length: 255
+        level:
+            type: integer
+            length: 10
+        socketSessionId:
+            type: string
+            length: 255
+            nullable: true
     oneToOne:
         setting:
             targetEntity: AppBundle\Entity\Setting
-            cascade: [ persist ]
+            cascade: [ persist, remove ]
+    oneToMany:
+        achievements:
+            targetEntity: AppBundle\Entity\Achievement
+            cascade: [ persist, remove ]
+            mappedBy: user
+            joinColumn:
+                name: achievement_id
+                referencedColumnName: id

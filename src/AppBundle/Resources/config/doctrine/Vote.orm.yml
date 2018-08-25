@@ -1,0 +1,29 @@
+AppBundle\Entity\Vote:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\VoteRepository
+    inheritanceType: JOINED
+    discriminatorColumn:
+        name: discr
+        type: string
+    discriminatorMap:
+        like_vote: LikeVote
+        favorite_vote: FavoriteVote
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        userIp:
+            type: string
+            length: 20
+            nullable: true
+    manyToOne:
+        user:
+            targetEntity: AppBundle\Entity\User
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

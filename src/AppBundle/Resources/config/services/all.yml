@@ -3,4 +3,7 @@ imports:
   - { resource: 'form.yml' }
   - { resource: 'listener.yml' }
   - { resource: 'mailer.yml' }
+  - { resource: 'socket.yml' }
+  - { resource: 'topic.yml' }
   - { resource: 'util.yml' }
+  - { resource: 'validator.yml' }

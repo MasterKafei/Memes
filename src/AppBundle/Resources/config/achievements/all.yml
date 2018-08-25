@@ -1,0 +1,53 @@
+#Like Vote Achievements
+app_achievements_worshiper:
+    identifier: 1
+    config: '@AppBundle/Resources/config/achievements/worshiper.yml'
+    template: '@Layout/Widget/Achievement/Default/base.html.twig'
+    validators:
+        app.validator.achievement.like_vote_number:
+            parameters: {number: 10}
+
+app_achievements_passionate:
+    identifier: 3
+    config: '@AppBundle/Resources/config/achievements/passionate.yml'
+    template: '@Layout/Widget/Achievement/Default/base.html.twig'
+    validators:
+        app.validator.achievement.like_vote_number:
+            parameters: {number: 100}
+
+app_achievements_votary:
+    identifier: 4
+    config: '@AppBundle/Resources/config/achievements/votary.yml'
+    template: '@Layout/Widget/Achievement/Default/base.html.twig'
+    validators:
+        app.validator.achievement.like_vote_number:
+            parameters: {number: 1000}
+
+app_achievements_idolatrous:
+    identifier: 5
+    config: '@AppBundle/Resources/config/achievements/idolatrous.yml'
+    template: '@Layout/Widget/Achievement/Default/base.html.twig'
+    validators:
+        app.validator.achievement.like_vote_number:
+            parameters: {number: 10000}
+
+#Favorite Vote Achievement
+app_achievements_favority:
+    identifier: 6
+    config: '@AppBundle/Resources/config/achievements/favority.yml'
+    template: '@Layout/Widget/Achievement/Default/base.html.twig'
+    validators:
+        app.validator.achievement.favorite_vote_number:
+            parameters: {number: 5}
+
+
+#Favorite & Like Vote Achievement
+app_achievements_newbie:
+    identifier: 2
+    config: '@AppBundle/Resources/config/achievements/newbie.yml'
+    template: '@Layout/Widget/Achievement/Default/base.html.twig'
+    validators:
+        app.validator.achievement.like_vote_number:
+            parameters: {number: 1}
+        app.validator.achievement.favorite_vote_number:
+            parameters: {number: 1}

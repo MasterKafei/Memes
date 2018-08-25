@@ -18,8 +18,21 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
 
+            /* Assetic Bundle*/
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+
             /* Vich Uploader Bundle */
             new Vich\UploaderBundle\VichUploaderBundle(),
+
+            /* Fos JS Routing Bundle */
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+
+            /* Web Socket Bundle */
+            new Gos\Bundle\WebSocketBundle\GosWebSocketBundle(),
+            new Gos\Bundle\PubSubRouterBundle\GosPubSubRouterBundle(),
+
+            /* Doctrine Cache Bundle */
+            new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

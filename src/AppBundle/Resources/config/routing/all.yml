@@ -1,3 +1,7 @@
+app_achievement:
+    resource: "achievement/all.yml"
+    prefix:   /achievement/
+
 app_admin:
     resource: "admin/all.yml"
     prefix:   /admin/

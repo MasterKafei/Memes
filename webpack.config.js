@@ -9,6 +9,7 @@ Encore
 
     // will create web/build/app.js and web/build/app.css
     .addEntry('app', './src/AppBundle/Resources/assets/app.js')
+    .addEntry('js/Post/Listing/list', './src/AppBundle/Resources/assets/js/Post/Listing/list.js')
 
     // allow legacy applications to use $/jQuery as a global variable
     .autoProvidejQuery()

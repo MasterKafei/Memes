@@ -60,11 +60,28 @@ class User implements UserInterface
      */
     private $token;
 
+    /**
+     * @var int
+     */
+    private $level;
+
+    /**
+     * @var Achievement[]
+     */
+    private $achievements;
+
+    /**
+     * @var string
+     */
+    private $socketSessionId;
+
     public function __construct()
     {
         $this->roles = array();
+        $this->achievements = array();;
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $this->enabled = false;
+        $this->level = 0;
     }
 
     /**
@@ -292,5 +309,86 @@ class User implements UserInterface
         $this->token = $token;
 
         return $this;
+    }
+
+    /**
+     * Get level.
+     *
+     * @return int
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * Set level.
+     *
+     * @param int $level
+     *
+     * @return User
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * Get achievements.
+     *
+     * @return Achievement[]
+     */
+    public function getAchievements()
+    {
+        return $this->achievements;
+    }
+
+    /**
+     * Set achievements.
+     *
+     * @param Achievement[] $achievements
+     *
+     * @return User
+     */
+    public function setAchievements($achievements)
+    {
+        $this->achievements = $achievements;
+
+        return $this;
+    }
+
+    /**
+     * Add achievement.
+     *
+     * @param Achievement $achievement
+     * @return $this
+     */
+    public function addAchievement(Achievement $achievement)
+    {
+        $this->achievements[] = $achievement;
+
+        return $this;
+    }
+
+    /**
+     * @param string $socketSessionId
+     *
+     * @return User
+     */
+    public function setSocketSessionId($socketSessionId)
+    {
+        $this->socketSessionId = $socketSessionId;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSocketSessionId()
+    {
+        return $this->socketSessionId;
     }
 }

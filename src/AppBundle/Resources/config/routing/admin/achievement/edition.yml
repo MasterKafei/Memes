@@ -1,0 +1,5 @@
+app_admin_achievement_edition_edit_achievement:
+    path:   /edit_achievement/{identifier}
+    defaults: { _controller: 'AppBundle:Admin\Achievement\Edition:editAchievement' }
+    requirements:
+        identifier: \d+

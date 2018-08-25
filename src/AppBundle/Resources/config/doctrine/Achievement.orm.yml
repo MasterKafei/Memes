@@ -1,0 +1,18 @@
+AppBundle\Entity\Achievement:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\AchievementRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        identifier:
+            type: integer
+    manyToOne:
+        user:
+            targetEntity: AppBundle\Entity\User
+            inversedBy: achievements
+    lifecycleCallbacks: {  }

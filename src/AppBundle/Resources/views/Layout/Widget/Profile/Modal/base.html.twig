@@ -1,0 +1,38 @@
+{% set user = user_business.loadUser %}
+{% set likeVotes = vote_business.likeUserVotes %}
+{% set favoriteVotes = vote_business.favoriteUserVotes %}
+{% set xp = user_business.userXp %}
+<div class="profile-area" id="profile-area">
+    <i class="fas fa-times" id="profile-close" onclick="profile_nav('close')"></i>
+    <div class="row">
+        <div class="col-6 col-md-3 text-center">
+            <h2 class="color-primary d-none d-md-block">Experience</h2>
+            <h4 class="color-primary d-md-none">Experience</h4>
+            <h1 class="display-2 d-none d-md-block">{{ xp }} xp</h1>
+            <h1 class="display-4 d-md-none">{{ xp }} xp</h1>
+        </div>
+        <div class="col-6 col-md-3 text-center">
+            <h2 class="color-primary d-none d-md-block">Liked</h2>
+            <h4 class="color-primary d-md-none">Liked</h4>
+            <h1 class="display-2 d-none d-md-block">{{ likeVotes|length }}</h1>
+            <h1 class="display-4 d-md-none">{{ likeVotes|length }}</h1>
+        </div>
+        <div class="col-6 col-md-3 text-center">
+            <h2 class="color-primary d-none d-md-block">Favorited</h2>
+            <h4 class="color-primary d-md-none">Favorited</h4>
+            <h1 class="display-2 d-none d-md-block">{{ favoriteVotes|length }}</h1>
+            <h1 class="display-4 d-md-none">{{ favoriteVotes|length }}</h1>
+        </div>
+        <div class="col-6 col-md-3 text-center">
+            <h2 class="color-primary d-none d-md-block">Account</h2>
+            <h4 class="color-primary d-md-none">Account</h4>
+            {% if user_business.isUserRegister(user) %}
+                <i class="fas fa-check display-1 color-primary d-none d-md-block"></i>
+                <i class="fas fa-check display-4 color-primary d-md-none"></i>
+            {% else %}
+                <i class="fas fa-times display-1 color-optionnal d-none d-md-block"></i>
+                <i class="fas fa-times display-4 color-optionnal d-md-none"></i>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="achievement-wrapper achievement-wrapper-notification achievement-lock achievement-unlocked">
+    <div class="achievement-image-wrapper">
+        <div class="achievement-image-border">
+            <div class="achievement-image" style="background-image: url('{{ asset(achievement_business.achievementImageAssetPath(achievement)) }}');">
+                <i class="fas fa-lock fa-fw fa-3x"></i>
+            </div>
+        </div>
+    </div>
+    <div class="achievement-text-wrapper">
+        <div class="achievement-title">
+            <h1>{{ achievement.name }}</h1>
+        </div>
+        <div class="achievement-text">
+            <span>{{ achievement.description }}</span>
+        </div>
+        <div class="achievement-reward">
+            <small>Reward: </small>
+            <small>{{ achievement.xp }} xp</small>
+        </div>
+    </div>
+</div>

@@ -18,48 +18,52 @@
     </div>
     <div class="menu-zone">
         <div class="item-sorted">
-            <a href="{{ path('app_home_list', {'category': 'latest'}) }}">
-                <div class="item" id="new">
-                    <i class="fas fa-birthday-cake fa-fw"></i>
+            <a href="{{ path('app_home_list', {'category': constant('AppBundle\\Controller\\Post\\ListingController::NEWS_CATEGORY_NAME')}) }}">
+                <div class="item">
+                    <i class="fas fa-birthday-cake fa-fw" id="new"></i>
                     <span>Newest</span>
                 </div>
             </a>
-            <a href="{{ path('app_home_list', {'category': 'like'}) }}">
-                <div class="item" id="hot">
-                    <i class="fas fa-fire fa-fw"></i>
+            <a href="{{ path('app_home_list', {'category': constant('AppBundle\\Controller\\Post\\ListingController::HOT_CATEGORY_NAME')}) }}">
+                <div class="item">
+                    <i class="fas fa-fire fa-fw" id="hot"></i>
                     <span>Hot</span>
                 </div>
             </a>
-            <a href="{{ path('app_home_list', {'category': 'rise'}) }}">
-                <div class="item" id="rising">
-                    <i class="fas fa-arrow-up fa-fw"></i>
+            <a href="{{ path('app_home_list', {'category': constant('AppBundle\\Controller\\Post\\ListingController::RISE_CATEGORY_NAME')}) }}">
+                <div class="item">
+                    <i class="fas fa-arrow-up fa-fw" id="rising"></i>
                     <span>Rising</span>
                 </div>
             </a>
-            <a href="{{ path('app_home_list', {'category': 'favorite'}) }}">
-                <div class="item" id="favorite">
-                    <i class="fas fa-star fa-fw"></i>
+            <a href="{{ path('app_home_list', {'category': constant('AppBundle\\Controller\\Post\\ListingController::FAVORITE_CATEGORY_NAME')}) }}">
+                <div class="item">
+                    <i class="fas fa-star fa-fw" id="favorite"></i>
                     <span>Favorited</span>
                 </div>
             </a>
         </div>
         <div class="item-social">
-            <div class="item" id="facebook">
-                <i class="fab fa-facebook fa-fw"></i>
+            <div class="item">
+                <i class="fab fa-facebook fa-fw" id="facebook"></i>
                 <span>Facebook</span>
             </div>
-            <div class="item" id="twitter">
-                <i class="fab fa-twitter fa-fw"></i>
+            <div class="item">
+                <i class="fab fa-twitter fa-fw" id="twitter"></i>
                 <span>Twitter</span>
             </div>
-            <div class="item" id="instagram">
-                <i class="fab fa-instagram fa-fw"></i>
+            <div class="item">
+                <i class="fab fa-instagram fa-fw" id="instagram"></i>
                 <span>Instagram</span>
             </div>
         </div>
         <div class="item-settings">
-            <div class="item" id="settings" onclick="settings_nav('open')">
-                <i class="fas fa-cogs fa-fw"></i>
+            <div class="item" onclick="profile_nav('open')">
+                <i class="fas fa-user fa-fw" id="user-profile"></i>
+                <span>My profile</span>
+            </div>
+            <div class="item" onclick="settings_nav('open')">
+                <i class="fas fa-cogs fa-fw" id="settings"></i>
                 <span> Settings</span>
             </div>
         </div>

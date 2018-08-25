@@ -1,0 +1,10 @@
+services:
+    app.socket.abstract:
+        class: AppBundle\Service\Socket\AbstractSocket
+        abstract: true
+        parent: app.util.abstract_container_aware
+
+    app.socket.achievement:
+        class: AppBundle\Service\Socket\Achievement\AchievementSocket
+        parent: app.socket.abstract
+        public: true

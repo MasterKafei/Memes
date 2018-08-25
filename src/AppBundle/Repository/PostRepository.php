@@ -2,7 +2,9 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Controller\Post\ListingController;
 use AppBundle\Entity\Post;
+use Doctrine\ORM\Mapping;
 
 /**
  * PostRepository
@@ -12,6 +14,29 @@ use AppBundle\Entity\Post;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
+    private static $options;
+
+    public function __construct($em, Mapping\ClassMetadata $class)
+    {
+        parent::__construct($em, $class);
+        try {
+            self::$options = array(
+                'period' => array(
+                    ListingController::ALL_TIME_PERIOD_KEY => (new \DateTime())->setTimestamp(0),
+                    ListingController::THIS_YEAR_PERIOD_KEY => (new \DateTime())->sub(new \DateInterval('P1Y')),
+                    ListingController::THIS_MONTH_PERIOD_KEY => (new \DateTime())->sub(new \DateInterval('P1M')),
+                    ListingController::THIS_WEEK_PERIOD_KEY => (new \DateTime())->sub(new \DateInterval('P7D')),
+                    ListingController::TODAY_PERIOD_KEY => (new \DateTime())->sub(new \DateInterval('P1D')),
+                )
+            );
+        }
+        catch(\Exception $e)
+        {
+            throw new \RuntimeException('Should never be called');
+        }
+    }
+
+
     public function findMostLatestPublished()
     {
         return $this->_em->createQueryBuilder()
@@ -22,33 +47,55 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()->getResult();
     }
 
-    public function findMostLikedPublished()
+    public function findMostLikedPublished(array $options = array())
     {
-        return $this->_em->createQueryBuilder()
+        $queryBuilder = $this->_em->createQueryBuilder()
             ->select('post')
             ->from(Post::class, 'post')
-            ->where('post.published = 1')
-            ->orderBy('post.numberOfLikes', 'DESC')
+            ->where('post.published = 1');
+
+
+        if (array_key_exists('period', $options)) {
+            $queryBuilder
+                ->andWhere('post.lastUpdate > :period')
+                ->setParameter('period', self::$options['period'][$options['period']]);
+        }
+
+        return $queryBuilder->orderBy('SIZE(post.likeVotes)', 'DESC')
             ->getQuery()->getResult();
     }
 
-    public function findMostFavoritePublished()
+    public function findMostFavoritePublished(array $options = array())
     {
-        return $this->_em->createQueryBuilder()
+        $queryBuilder = $this->_em->createQueryBuilder()
             ->select('post')
             ->from(Post::class, 'post')
-            ->where('post.published = 1')
-            ->orderBy('post.numberOfFavorites', 'DESC')
+            ->where('post.published = 1');
+
+        if (array_key_exists('period', $options)) {
+            $queryBuilder
+                ->andWhere('post.lastUpdate > :period')
+                ->setParameter('period', self::$options['period'][$options['period']]);
+        }
+
+        return $queryBuilder->orderBy('SIZE(post.favoriteVotes)', 'DESC')
             ->getQuery()->getResult();
     }
 
-    public function findMostRisingPublished()
+    public function findMostRisingPublished(array $options = array())
     {
-        return $this->_em->createQueryBuilder()
+        $queryBuilder = $this->_em->createQueryBuilder()
             ->select('post')
             ->from(Post::class, 'post')
-            ->where('post.published = 1')
-            ->orderBy('post.numberOfLikes', 'DESC')
+            ->where('post.published = 1');
+
+        if (array_key_exists('period', $options)) {
+            $queryBuilder
+                ->andWhere('post.lastUpdate > :period')
+                ->setParameter('period', self::$options['period'][$options['period']]);
+        }
+
+        return $queryBuilder->orderBy('COUNT(post.likeVotes)', 'DESC')
             ->getQuery()->getResult();
     }
 }

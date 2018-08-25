@@ -18,9 +18,4 @@ AppBundle\Entity\Content:
             id: true
             generator:
                 strategy: AUTO
-    oneToOne:
-        post:
-            targetEntity: AppBundle\Entity\Post
-            mappedBy: content
-            cascade: [ persist, remove ]
     lifecycleCallbacks: {  }

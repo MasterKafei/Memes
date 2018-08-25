@@ -1,0 +1,8 @@
+services:
+    app.validator.achievement.favorite_vote_number:
+        class: AppBundle\Service\Validator\Achievement\FavoriteVoteNumberValidator
+        parent: app.util.abstract_container_aware
+
+    app.validator.achievement.like_vote_number:
+        class: AppBundle\Service\Validator\Achievement\LikeVoteNumberValidator
+        parent: app.util.abstract_container_aware

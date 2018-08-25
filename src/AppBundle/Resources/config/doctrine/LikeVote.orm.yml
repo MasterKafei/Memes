@@ -1,0 +1,12 @@
+AppBundle\Entity\LikeVote:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\LikeVoteRepository
+    manyToOne:
+        post:
+            targetEntity: AppBundle\Entity\Post
+            inversedBy: likeVotes
+            joinColumn:
+                name: like_post_id
+                referencedColumnName: id
+    lifecycleCallbacks: {}

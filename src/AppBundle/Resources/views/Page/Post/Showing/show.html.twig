@@ -1,9 +1,5 @@
 {% extends '@Layout/Page/Full/base.html.twig' %}
 
 {% block body %}
-
-    {{ post.name }}
-    {{ post.description }}
-
-    {% include '@Layout/Widget/Post/Full/base.html.twig' with {'post': post} %}
+    {% include '@Layout/Widget/Post/Full/base.html.twig' with {'post': post}%}
 {% endblock body %}
