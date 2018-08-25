@@ -6,20 +6,20 @@
         <div class="card-buttons">
             {% if vote_business.userLikeVotePost(post) %}
                 <a class="card-button like-post-ajax-vote" post-id="{{ post.id }}">
-                    <i class="fas fa-heart fa-fw heart" id="icon-like-post-vote-number-{{ post.id }}"></i>
+                    <i class="fas fa-heart fa-fw card-heart" id="icon-like-post-vote-number-{{ post.id }}"></i>
                 </a>
             {% else %}
                 <a class="card-button like-post-ajax-vote" post-id="{{ post.id }}">
-                    <i class="far fa-heart fa-fw heart" id="icon-like-post-vote-number-{{ post.id }}"></i>
+                    <i class="far fa-heart fa-fw card-heart" id="icon-like-post-vote-number-{{ post.id }}"></i>
                 </a>
             {% endif %}
             {% if vote_business.userFavoriteVotePost(post) %}
                 <a class="card-button favorite-post-ajax-vote" post-id="{{ post.id }}">
-                    <i class="fas fa-star fa-fw star" id="icon-favorite-post-vote-number-{{ post.id }}"></i>
+                    <i class="fas fa-star fa-fw star card-star" id="icon-favorite-post-vote-number-{{ post.id }}"></i>
                 </a>
             {% else %}
                 <a class="card-button favorite-post-ajax-vote" post-id="{{ post.id }}">
-                    <i class="far fa-star fa-fw star" id="icon-favorite-post-vote-number-{{ post.id }}"></i>
+                    <i class="far fa-star fa-fw star card-star" id="icon-favorite-post-vote-number-{{ post.id }}"></i>
                 </a>
             {% endif %}
             <a class="card-button" onclick="share_modal('open', '#', '#', '#', '#', '{{ absolute_url(path('app_post_showing_show_post', {'id': post.id})) }}')">
