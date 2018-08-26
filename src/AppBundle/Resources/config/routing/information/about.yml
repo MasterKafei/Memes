@@ -1,0 +1,3 @@
+app_information_about_index:
+    path: /
+    defaults: { _controller: 'AppBundle:Information\About:index' }

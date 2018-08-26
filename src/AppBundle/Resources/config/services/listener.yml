@@ -5,6 +5,11 @@ services:
       - { name: doctrine.orm.entity_listener, entity: AppBundle\Entity\Post, event: prePersist }
       - { name: doctrine.orm.entity_listener, entity: AppBundle\Entity\Post, event: preUpdate }
 
+  app.listener.vote:
+    class: AppBundle\Service\Listener\VoteListener
+    tags:
+      - { name: doctrine.orm.entity_listener, entity: AppBundle\Entity\Vote, event: prePersist }
+
   app.listener.achievement.like_vote:
     class: AppBundle\Service\Listener\Achievement\LikeVoteListener
     parent: app.util.abstract_container_aware

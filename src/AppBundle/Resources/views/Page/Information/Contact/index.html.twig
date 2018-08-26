@@ -1,0 +1,35 @@
+{% extends '@Layout/Page/Full/base.html.twig' %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-3 text-center">CONTACT</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row m-md-5 text-center">
+        <div class="col-12">
+            <h5 class="text-uppercase text-muted">Talking with us</h5>
+            <h1 class="display-2 color-primary d-none d-md-block">{{ mailer_parameters['talking_address'] }}</h1>
+            <h1 class="color-primary d-md-none">{{ mailer_parameters['talking_address'] }}</h1>
+        </div>
+    </div>
+    <div class="row m-md-5 text-center">
+        <div class="col-12">
+            <h5 class="text-uppercase text-muted">Partnerships, Commercials</h5>
+            <h1 class="display-2 color-primary d-none d-md-block">{{ mailer_parameters['contact_address'] }}</h1>
+            <h1 class="color-primary d-md-none">{{ mailer_parameters['contact_address'] }}</h1>
+        </div>
+    </div>
+    <div class="row m-md-5 text-center">
+        <div class="col-12">
+            <h5 class="text-uppercase text-muted">Bugs ? Need some help ?</h5>
+            <h1 class="display-2 color-primary d-none d-md-block">{{ mailer_parameters['help_address'] }}</h1>
+            <h1 class="color-primary d-md-none">{{ mailer_parameters['help_address'] }}</h1>
+        </div>
+    </div>
+</div>
+{% endblock body %}

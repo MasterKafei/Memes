@@ -1,0 +1,7 @@
+app_information_about:
+    resource: 'about.yml'
+    prefix: /about/
+
+app_information_contact:
+    resource: 'contact.yml'
+    prefix: /contact/
