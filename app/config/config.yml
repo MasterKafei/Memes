@@ -102,14 +102,14 @@ assetic:
 # Web Socket Configuration
 gos_web_socket:
   server:
-    host: 127.0.0.1   #The host ip to bind to
+    host: '%server_ip%' #The host ip to bind to
     port: 8080        #The port the socket server will listen on
     router:
       resources:
         - '@AppBundle/Resources/config/routing/topic/all.yml'
   pushers:
     zmq:
-      host: 127.0.0.1
+      host: '%server_ip%'
       port: 5555
       persistent: true
       protocol: tcp
@@ -124,7 +124,7 @@ doctrine_cache:
   providers:
     redis_cache:
       redis:
-        host: 127.0.0.1
+        host: '%server_ip%'
         port: 6379
         database: 3
     websocket_cache_client:

@@ -17,5 +17,7 @@ parameters:
     mailer_password: ~
     mailer_port: ~
 
+    server_ip: ~
+
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
