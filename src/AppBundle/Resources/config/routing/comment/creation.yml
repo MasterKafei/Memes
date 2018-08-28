@@ -1,0 +1,5 @@
+app_comment_creation_create_comment:
+    path:   /create_comment/{id}
+    defaults: { _controller: 'AppBundle:Comment\Creation:createComment' }
+    requirements:
+        id: \d+

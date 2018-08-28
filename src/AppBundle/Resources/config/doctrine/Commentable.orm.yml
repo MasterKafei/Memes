@@ -1,0 +1,23 @@
+AppBundle\Entity\Commentable:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\CommentRepository
+    inheritanceType: JOINED
+    discriminatorColumn:
+        name: discr
+        type: string
+    discriminatorMap:
+        comment: Comment
+        post: Post
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    oneToMany:
+        comments:
+            targetEntity: AppBundle\Entity\Comment
+            mappedBy: target
+            cascade: [ persist, remove ]
+    lifecycleCallbacks: {  }

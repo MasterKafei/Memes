@@ -20,6 +20,8 @@ class BroadcastCommand extends Command
     {
         parent::__construct();
         $this->topic = $topic;
+
+        $container->get('session.handler.pdo')->createTable();
     }
 
     protected function configure()

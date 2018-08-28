@@ -5,13 +5,8 @@ namespace AppBundle\Entity;
 /**
  * Post
  */
-class Post
+class Post extends Commentable
 {
-    /**
-     * @var int
-     */
-    private $id;
-
     /**
      * @var string|null
      */
@@ -46,17 +41,6 @@ class Post
      * @var bool
      */
     private $published;
-
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set name.

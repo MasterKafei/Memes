@@ -6,6 +6,10 @@ app_admin:
     resource: "admin/all.yml"
     prefix:   /admin/
 
+app_comment:
+    resource: "comment/all.yml"
+    prefix:   /comment/
+
 app_information:
     resource: "information/all.yml"
     prefix:   /information/

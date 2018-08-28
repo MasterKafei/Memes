@@ -40,3 +40,5 @@ security:
                 path:     /
             user_checker: AppBundle\Security\UserChecker
 
+    access_control:
+        - { path: ^/comment/, roles : ROLE_USER }

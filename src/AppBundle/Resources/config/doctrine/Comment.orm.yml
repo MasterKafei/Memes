@@ -1,0 +1,32 @@
+AppBundle\Entity\Comment:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\CommentRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        text:
+            type: string
+            length: 255
+            nullable: true
+        postedDate:
+            type: datetime
+    manyToOne:
+        target:
+            targetEntity: AppBundle\Entity\Commentable
+            inversedBy: comments
+            cascade: [ persist ]
+            joinColumn:
+                nullable: false
+                unique: false
+        user:
+            targetEntity: AppBundle\Entity\User
+            cascade: [ persist ]
+            joinColumn:
+                nullable: false
+                unique: false
+    lifecycleCallbacks: {  }

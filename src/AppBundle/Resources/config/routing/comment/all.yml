@@ -1,0 +1,7 @@
+app_comment_creation:
+    resource: "creation.yml"
+    prefix:   /creation/
+
+app_comment_edition:
+    resource: "edition.yml"
+    prefix:   /edition/

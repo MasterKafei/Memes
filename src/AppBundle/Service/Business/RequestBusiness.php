@@ -28,4 +28,17 @@ class RequestBusiness extends AbstractContainerAware
             throw new NotFoundHttpException();
         }
     }
+
+    /**
+     * @return bool
+     */
+    public function isMasterRequest()
+    {
+        return (null === $this->container->get('request_stack')->getParentRequest());
+    }
+
+    public function getSourceUrl()
+    {
+        return $this->getMasterRequest()->headers->get('referer');
+    }
 }

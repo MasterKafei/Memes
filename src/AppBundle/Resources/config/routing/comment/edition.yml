@@ -1,0 +1,5 @@
+app_comment_edition_edit_comment:
+    path:   /edit_comment/{id}
+    defaults: { _controller: 'AppBundle:Comment\Edition:editComment' }
+    requirements:
+        id: \d+
