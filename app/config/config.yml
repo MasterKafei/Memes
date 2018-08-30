@@ -47,6 +47,7 @@ twig:
     user_business: '@app.business.user'
     vote_business: '@app.business.vote'
     achievement_business: '@app.business.achievement'
+    post_bussiness: '@app.business.post'
     mailer_parameters: '%mailer_params%'
 
 # Doctrine Configuration

@@ -1,0 +1,7 @@
+{% if content is image %}
+    {% include '@Layout/Widget/Image/base.html.twig' with {'image': content} %}
+{% elseif content is video %}
+    {% include '@Layout/Widget/Video/Full/base.html.twig' with {'video': content} %}
+{% elseif content is youtube_link %}
+    {% include '@Layout/Widget/YoutubeLink/Full/base.html.twig' with {'youtube_link': content} %}
+{% endif %}

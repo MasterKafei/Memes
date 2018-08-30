@@ -1,1 +1,4 @@
-{{ form(form) }}
+{{ form_start(form) }}
+{{ form_widget(form.text) }}
+{{ form_widget(form.submit, {'label': 'Send'|raw}) }}
+{{ form_end(form) }}

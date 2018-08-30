@@ -56,9 +56,15 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
 
 
         if (array_key_exists('period', $options)) {
+            if(!array_key_exists($options['period'], self::$options['period'])) {
+                $period = ListingController::DEFAULT_PERIOD_KEY;
+            } else {
+                $period = self::$options['period'][$options['period']];
+            }
+
             $queryBuilder
                 ->andWhere('post.lastUpdate > :period')
-                ->setParameter('period', self::$options['period'][$options['period']]);
+                ->setParameter('period', $period);
         }
 
         return $queryBuilder->orderBy('SIZE(post.likeVotes)', 'DESC')
@@ -73,9 +79,15 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->where('post.published = 1');
 
         if (array_key_exists('period', $options)) {
+            if(!array_key_exists($options['period'], self::$options['period'])) {
+                $period = ListingController::DEFAULT_PERIOD_KEY;
+            } else {
+                $period = self::$options['period'][$options['period']];
+            }
+
             $queryBuilder
                 ->andWhere('post.lastUpdate > :period')
-                ->setParameter('period', self::$options['period'][$options['period']]);
+                ->setParameter('period', $period);
         }
 
         return $queryBuilder->orderBy('SIZE(post.favoriteVotes)', 'DESC')
@@ -90,12 +102,45 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->where('post.published = 1');
 
         if (array_key_exists('period', $options)) {
+            if(!array_key_exists($options['period'], self::$options['period'])) {
+                $period = ListingController::DEFAULT_PERIOD_KEY;
+            } else {
+                $period = self::$options['period'][$options['period']];
+            }
+
             $queryBuilder
                 ->andWhere('post.lastUpdate > :period')
-                ->setParameter('period', self::$options['period'][$options['period']]);
+                ->setParameter('period', $period);
         }
 
         return $queryBuilder->orderBy('COUNT(post.likeVotes)', 'DESC')
             ->getQuery()->getResult();
+    }
+
+    public function getRandomPost($number = 1)
+    {
+        $ids = $this->createQueryBuilder('post')
+            ->select('post.id')
+            ->where('post.published = 1')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        shuffle($ids);
+        if(count($ids) > $number)
+        {
+            array_slice($ids, $number);
+        }
+
+        $posts = $this->createQueryBuilder('post')
+            ->select('post')
+            ->where('post.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
+
+        shuffle($posts);
+
+        return $posts;
     }
 }

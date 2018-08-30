@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-img-btn">
         <a href="{{ path('app_post_showing_show_post', {'id': post.id}) }}">
-            {% include '@Layout/Widget/Content/base.html.twig' with {'content': post.content} %}
+            {% include '@Layout/Widget/Content/Minimize/base.html.twig' with {'content': post.content} %}
         </a>
         <div class="card-buttons">
             {% if vote_business.userLikeVotePost(post) %}

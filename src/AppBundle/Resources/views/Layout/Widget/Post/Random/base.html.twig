@@ -1,0 +1,11 @@
+{% set posts = post_bussiness.randomPost(number) %}
+<div class="commentary-more">
+    <h3>or view more ?</h3>
+    {% for post in posts %}
+        <div class="more-item">
+            <a href="{{ path('app_post_showing_show_post', {'id': post.id}) }}">
+                {% include '@Layout/Widget/Content/Minimize/base.html.twig' with {'content': post.content} %}
+            </a>
+        </div>
+    {% endfor %}
+</div>

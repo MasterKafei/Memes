@@ -1,0 +1,25 @@
+<div class="commentary-header">
+    <span id="love">
+        <i class="fas fa-heart fa-fw"></i> {{ post.likeVotes|length|resizeNumber }}
+    </span>
+    <span id="favorite">
+        <i class="fas fa-star fa-fw"></i> {{ post.favoriteVotes|length|resizeNumber }}
+    </span>
+    <span id="time">
+        <i class="fas fa-clock fa-fw"></i> {{ post.lastUpdate|diffDateTime }}
+    </span>
+</div>
+<div class="commentary-image-wrapper">
+    {% include '@Layout/Widget/Content/Full/base.html.twig' with {'content': post.content} %}
+</div>
+<div class="commentary-body">
+    <div class="commentary-left">
+        <div class="commentary-message-box">
+            {% include '@Layout/Widget/Comment/Creation/Default/base.html.twig' with {'commentable': post} %}
+            {% include '@Layout/Widget/Comment/Listing/base.html.twig' with {'commentable': post}%}
+        </div>
+    </div>
+    <div class="commentary-right">
+        {% include '@Layout/Widget/Post/Random/base.html.twig' with {'number': 3} %}
+    </div>
+</div>

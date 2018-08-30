@@ -1,0 +1,35 @@
+{% set comment_has_sub_comment = comment.comments is not empty %}
+<div class="commentary-message-item">
+    <div class="commentary-message-author">
+        <div class="avatar">
+            <img src="https://api.adorable.io/avatars/155/1.png">
+        </div>
+        <div class="values">
+            <span class="level">{{ comment.user.level }}</span>|
+            <span class="achievements">
+                <i class="fas fa-trophy"></i> {{ comment.user.achievements|length }}
+            </span>
+            <span class="title">{{ comment.user.username }}</span>
+        </div>
+    </div>
+    <div class="message-box">
+        <p>
+            {{ comment.text }}
+        </p>
+        <div class="reply-box">
+            {% if comment_has_sub_comment %}
+                <span class="view" id="comment-replies-title-1" onclick="view_reply('{{ comment.id }}')">
+                    <i class="fas fa-eye fa-fw"></i> View replies
+                </span>
+            {% endif %}
+            <span class="reply">Reply {% if comment_has_sub_comment %}({{ comment.comments|length }}){% endif %}</span>
+        </div>
+    </div>
+    <div class="commentary-message-replies" id="comment-replies-{{ comment.id }}">
+        {% if comment_has_sub_comment %}
+            {% for sub_comment in comment.comments %}
+                {% include '@Layout/Widget/Comment/Default/base.html.twig' with {'comment': sub_comment} %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,8 @@
+{% if commentable.comments is not empty %}
+    <h3 class="title-comment">Comments ({{ commentable.comments|length }}) <small class="hide-comment" id="hide-comment" onclick="hide_comments()">hide</small></h3>
+    <div class="commentary-message-list" id="commentary-message-list">
+        {% for comment in commentable.comments %}
+            {% include '@Layout/Widget/Comment/Default/base.html.twig' with {'comment': comment} %}
+        {% endfor %}
+    </div>
+{% endif %}

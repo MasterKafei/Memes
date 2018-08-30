@@ -2,7 +2,7 @@
 
 namespace AppBundle\Entity;
 
-class Comment
+class Comment extends Commentable
 {
     /**
      * @var int

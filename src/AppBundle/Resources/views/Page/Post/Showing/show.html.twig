@@ -1,9 +1,9 @@
 {% extends '@Layout/Page/Full/base.html.twig' %}
 
 {% block body %}
-    {% include '@Layout/Widget/Post/Full/base.html.twig' with {'post': post}%}
-    {{ render(controller('AppBundle:Comment\\Creation:createComment', {'commentable': post})) }}
-    {% for comment in post.comments %}
-        <p>{{ comment.user.username }}: {{ comment.text }}  {{ comment.postedDate|diffDateTime }} ago </p>
-    {% endfor %}
+    <div class="commentary-back">
+        <div class="commentary-wrapper">
+            {% include '@Layout/Widget/Post/Full/base.html.twig' with {'post': post} %}
+        </div>
+    </div>
 {% endblock body %}
