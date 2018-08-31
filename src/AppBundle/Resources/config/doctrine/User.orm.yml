@@ -12,9 +12,11 @@ AppBundle\Entity\User:
         username:
             type: string
             length: 255
+            unique: true
         email:
             type: string
             length: 255
+            unique: true
         password:
             type: string
             length: 255
