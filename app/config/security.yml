@@ -41,5 +41,8 @@ security:
             user_checker: AppBundle\Security\UserChecker
 
     access_control:
-        - { path: ^/comment/, roles : ROLE_USER }
-        - { path: ^/admin/, roles : ROLE_ADMIN }
+        - { path: ^/comment/, roles: ROLE_USER }
+
+        - { path: ^/user/profile/, roles: ROLE_USER }
+
+        - { path: ^/admin/, roles: ROLE_ADMIN }

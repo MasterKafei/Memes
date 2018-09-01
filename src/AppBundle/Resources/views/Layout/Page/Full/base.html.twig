@@ -20,6 +20,7 @@
     <div class="website-wrapper" id="website-wrapper">
             {% block body %}{% endblock body %}
     </div>
+    {% include '@Layout/Widget/Alert/alert.html.twig' %}
     {% include '@Layout/Page/Full/footer.html.twig' %}
     {% include '@Layout/Page/Full/scripts.html.twig' %}
     {% block scripts %}{% endblock scripts %}

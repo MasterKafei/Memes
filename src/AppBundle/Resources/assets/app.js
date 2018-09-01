@@ -7,6 +7,7 @@ require('@fortawesome/fontawesome-free');
 require('@fortawesome/fontawesome-free/css/all.min.css');
 
 require('./css/main.min.css');
+require('./css/alert.css');
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();

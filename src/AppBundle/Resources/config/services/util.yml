@@ -7,6 +7,13 @@ services:
     app.util.token_generator:
         class: AppBundle\Service\Util\TokenGenerator
 
+    app.util.console:
+        class: AppBundle\Service\Util\Console\Console
+        parent: app.util.abstract_container_aware
+        calls:
+            - [setSession, ['@session']]
+        public: true
+
     pdo:
         class: PDO
         arguments:

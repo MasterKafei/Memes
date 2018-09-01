@@ -1,3 +1,7 @@
+app_user_profile:
+    prefix: /profile/
+    resource: "profile/all.yml"
+
 app_user_authentication:
     prefix: /authentication/
     resource: "authentication.yml"

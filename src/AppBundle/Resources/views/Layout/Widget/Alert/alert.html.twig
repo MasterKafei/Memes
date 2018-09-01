@@ -1,0 +1,23 @@
+{% set messages = util_console.messages() %}
+
+{% if messages is not empty or form is defined %}
+    <div class="memes-alert-box">
+        {% for key,message in messages %}
+            <div id="memes-alert-{{ key }}" class="memes-alert memes-alert-{{ message.type }}">
+                <div class="row align-items-center h-100">
+                    <div class="col-4 mx-auto text-center">
+                        <i class="{{ message.icon }} fa-4x"></i>
+                    </div>
+                    <div class="col-8 alert-text mx-auto">
+                        <p>
+                            {{ message.text }}
+                        </p>
+                        <button class="float-right btn alert-button"
+                                onclick="document.getElementById('memes-alert-{{ key }}').style.opacity='0';">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
