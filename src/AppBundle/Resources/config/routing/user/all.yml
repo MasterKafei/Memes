@@ -6,6 +6,10 @@ app_user_enabling:
     prefix: /enabling/
     resource: "enabling.yml"
 
+app_user_forgot_password:
+    prefix: /forgot_password/
+    resource: "forgot_password.yml"
+
 app_user_registration:
     prefix: /registration/
     resource: "registration.yml"

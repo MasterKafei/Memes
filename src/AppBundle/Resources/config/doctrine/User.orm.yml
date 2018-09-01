@@ -33,10 +33,9 @@ AppBundle\Entity\User:
         level:
             type: integer
             length: 10
-        socketSessionId:
+        passwordToken:
             type: string
             length: 255
-            nullable: true
     oneToOne:
         setting:
             targetEntity: AppBundle\Entity\Setting

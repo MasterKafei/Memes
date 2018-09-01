@@ -1,0 +1,6 @@
+{% extends '@Layout/Page/Full/base.html.twig' %}
+
+{% block body %}
+    {% if app.request.method == 'POST' %}An email has been send ! Check your mail box{% endif %}
+    {{ form(form) }}
+{% endblock body %}

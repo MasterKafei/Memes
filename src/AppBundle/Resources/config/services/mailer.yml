@@ -7,6 +7,10 @@ services:
         - [setRouter, ["@router"]]
         - [setParams, ["%mailer_params%"]]
 
+    app.mailer.user.forgot_password:
+        class: AppBundle\Service\Mailer\User\ForgotPasswordMailer
+        parent: app.mailer.abstract_mailer
+
     app.mailer.user.registration:
         class: AppBundle\Service\Mailer\User\RegistrationMailer
         parent: app.mailer.abstract_mailer

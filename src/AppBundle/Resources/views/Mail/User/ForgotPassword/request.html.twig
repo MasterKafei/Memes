@@ -1,0 +1,16 @@
+{% block subject %}
+    Forgot Password Request
+{% endblock subject %}
+
+
+{% block html %}
+    {% block head_html %}
+
+    {% endblock head_html %}
+
+    {% block body_html %}
+        {% block body_text %}
+            <a href="{{ absolute_url(path('app_user_forgot_password_check_token', {'id': user.id, 'token': user.passwordToken})) }}">Click here</a> to reset
+        {% endblock body_text %}
+    {% endblock body_html %}
+{% endblock html %}

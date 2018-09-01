@@ -73,7 +73,7 @@ class User implements UserInterface
     /**
      * @var string
      */
-    private $socketSessionId;
+    private $passwordToken;
 
     public function __construct()
     {
@@ -373,22 +373,26 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $socketSessionId
+     * Get passwordToken.
      *
-     * @return User
+     * @return string
      */
-    public function setSocketSessionId($socketSessionId)
+    public function getPasswordToken()
     {
-        $this->socketSessionId = $socketSessionId;
-
-        return $this;
+        return $this->passwordToken;
     }
 
     /**
-     * @return string
+     * Set passwordToken.
+     *
+     * @param string $passwordToken
+     *
+     * @return User
      */
-    public function getSocketSessionId()
+    public function setPasswordToken($passwordToken)
     {
-        return $this->socketSessionId;
+        $this->passwordToken = $passwordToken;
+
+        return $this;
     }
 }
