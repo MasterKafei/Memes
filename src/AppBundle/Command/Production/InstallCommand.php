@@ -2,13 +2,11 @@
 
 namespace AppBundle\Command\Production;
 
-use Symfony\Component\Console\Application;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Process\Process;
@@ -37,17 +35,21 @@ class InstallCommand extends Command
         /* Update project from github */
         $fetchAllProcess = new Process('git fetch --all');
         $fetchAllProcess->run();
+        $this->forceProcessToBeSync($fetchAllProcess);
 
         $resetMaster = new Process('git reset --hard origin/master');
         $resetMaster->run();
+        $this->forceProcessToBeSync($resetMaster);
 
         /* Install vendor */
         $composerInstall = new Process('composer install');
         $composerInstall->run();
+        $this->forceProcessToBeSync($composerInstall);
 
         /* Give write authorization in the project */
         $chmod = new Process('chmod -R 777 *');
         $chmod->run();
+        $this->forceProcessToBeSync($chmod);
 
 
         $application = new Application($this->container->get('kernel'));
@@ -56,7 +58,8 @@ class InstallCommand extends Command
         /* Drop database */
         if($input->getOptions('drop-database')) {
             $databaseDrop = new ArrayInput(array(
-                'command' => 'doctrine:database:drop --force',
+                'command' => 'doctrine:database:drop',
+                '--force' => true,
             ));
 
             $databaseCreate = new ArrayInput(array(
@@ -71,9 +74,17 @@ class InstallCommand extends Command
         }
 
         $databaseSchemaUpdate = new ArrayInput(array(
-                'command' => 'doctrine:schema:update --force',
+                'command' => 'doctrine:schema:update',
+                '--force' => true,
         ));
         $application->run($databaseSchemaUpdate, $output);
 
+    }
+
+    public function forceProcessToBeSync(Process $process)
+    {
+        while ($process->isRunning()) {
+        }
+        echo $process->getOutput();
     }
 }
