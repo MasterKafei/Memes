@@ -30,12 +30,14 @@ AppBundle\Entity\User:
         token:
             type: string
             length: 255
+            nullable: true
         level:
             type: integer
             length: 10
         passwordToken:
             type: string
             length: 255
+            nullable: true
     oneToOne:
         setting:
             targetEntity: AppBundle\Entity\Setting

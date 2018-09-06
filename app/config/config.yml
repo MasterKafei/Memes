@@ -92,7 +92,7 @@ vich_uploader:
     mappings:
         file:
             uri_prefix: /uploads/file/
-            upload_destination: '%kernel.project_dir%/web/uploads/file/'
+            upload_destination: '%upload.file.directory%'
             namer: vich_uploader.namer_uniqid
 
 assetic:

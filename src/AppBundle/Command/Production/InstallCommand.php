@@ -24,32 +24,42 @@ class InstallCommand extends Command
     public function configure()
     {
         $this
-            ->setName('app:production:update')
+            ->setName('app:production:install')
             ->setDescription('Install the project on the production server')
-            ->addOption('drop-database', null, InputOption::VALUE_NONE, 'If you want to drop the current database to install new schemas');
+            ->addOption('drop-database', null, InputOption::VALUE_NONE, 'If you want to drop the current database to install new schemas')
+            ->addOption('skip-composer', null, InputOption::VALUE_NONE, 'If you don\'t want to do the composer install')
+            ->addOption('skip-git-pull', null, InputOption::VALUE_NONE, 'If you don\'t want to reset code')
+            ->addOption('skip-chmod', null, InputOption::VALUE_NONE, 'If you don\'t want to update folder rights')
+            ->addOption('skip-schema-update', null, InputOption::VALUE_NONE, 'If you don\'t want to update database schema');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Update of the project production');
         /* Update project from github */
-        $fetchAllProcess = new Process('git fetch --all');
-        $fetchAllProcess->run();
-        $this->forceProcessToBeSync($fetchAllProcess);
+        if (!$input->getOptions('skip-git-pull')) {
+            $fetchAllProcess = new Process('git fetch --all');
+            $fetchAllProcess->run();
+            $this->forceProcessToBeSync($fetchAllProcess);
 
-        $resetMaster = new Process('git reset --hard origin/master');
-        $resetMaster->run();
-        $this->forceProcessToBeSync($resetMaster);
+            $resetMaster = new Process('git reset --hard origin/master');
+            $resetMaster->run();
+            $this->forceProcessToBeSync($resetMaster);
+        }
 
         /* Install vendor */
-        $composerInstall = new Process('composer install');
-        $composerInstall->run();
-        $this->forceProcessToBeSync($composerInstall);
+        if (!$input->getOptions('skip-composer')) {
+            $composerInstall = new Process('composer install');
+            $composerInstall->run();
+            $this->forceProcessToBeSync($composerInstall);
+        }
 
         /* Give write authorization in the project */
-        $chmod = new Process('chmod -R 777 *');
-        $chmod->run();
-        $this->forceProcessToBeSync($chmod);
+        if(!$input->getOptions('skip-chmod')) {
+            $chmod = new Process('chmod -R 777 *');
+            $chmod->run();
+            $this->forceProcessToBeSync($chmod);
+        }
 
 
         $application = new Application($this->container->get('kernel'));
@@ -73,11 +83,13 @@ class InstallCommand extends Command
             $application->run($databaseSessionCreationTable, $output);
         }
 
-        $databaseSchemaUpdate = new ArrayInput(array(
+        if(!$input->getOptions('skip-schema-update')) {
+            $databaseSchemaUpdate = new ArrayInput(array(
                 'command' => 'doctrine:schema:update',
                 '--force' => true,
-        ));
-        $application->run($databaseSchemaUpdate, $output);
+            ));
+            $application->run($databaseSchemaUpdate, $output);
+        }
 
     }
 
