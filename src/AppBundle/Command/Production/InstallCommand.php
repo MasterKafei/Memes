@@ -28,7 +28,7 @@ class InstallCommand extends Command
             ->setDescription('Install the project on the production server')
             ->addOption('drop-database', null, InputOption::VALUE_NONE, 'If you want to drop the current database to install new schemas')
             ->addOption('skip-composer', null, InputOption::VALUE_NONE, 'If you don\'t want to do the composer install')
-            ->addOption('skip-git-pull', null, InputOption::VALUE_NONE, 'If you don\'t want to reset code')
+            ->addOption('git-pull', null, InputOption::VALUE_NONE, 'If you want to reset code from the branch master')
             ->addOption('skip-chmod', null, InputOption::VALUE_NONE, 'If you don\'t want to update folder rights')
             ->addOption('skip-schema-update', null, InputOption::VALUE_NONE, 'If you don\'t want to update database schema');
     }
@@ -37,7 +37,7 @@ class InstallCommand extends Command
     {
         $output->writeln('Update of the project production');
         /* Update project from github */
-        if (!$input->getOptions('skip-git-pull')) {
+        if (!$input->getOptions('git-pull')) {
             $fetchAllProcess = new Process('git fetch --all');
             $fetchAllProcess->run();
             $this->forceProcessToBeSync($fetchAllProcess);
@@ -48,14 +48,14 @@ class InstallCommand extends Command
         }
 
         /* Install vendor */
-        if (!$input->getOptions('skip-composer')) {
+        if ($input->getOptions('skip-composer')) {
             $composerInstall = new Process('composer install');
             $composerInstall->run();
             $this->forceProcessToBeSync($composerInstall);
         }
 
         /* Give write authorization in the project */
-        if(!$input->getOptions('skip-chmod')) {
+        if($input->getOptions('skip-chmod')) {
             $chmod = new Process('chmod -R 777 *');
             $chmod->run();
             $this->forceProcessToBeSync($chmod);
@@ -66,7 +66,7 @@ class InstallCommand extends Command
         $application->setAutoExit(false);
 
         /* Drop database */
-        if($input->getOptions('drop-database')) {
+        if(!$input->getOptions('drop-database')) {
             $databaseDrop = new ArrayInput(array(
                 'command' => 'doctrine:database:drop',
                 '--force' => true,
@@ -83,12 +83,19 @@ class InstallCommand extends Command
             $application->run($databaseSessionCreationTable, $output);
         }
 
-        if(!$input->getOptions('skip-schema-update')) {
+        if($input->getOptions('skip-schema-update')) {
             $databaseSchemaUpdate = new ArrayInput(array(
                 'command' => 'doctrine:schema:update',
                 '--force' => true,
             ));
             $application->run($databaseSchemaUpdate, $output);
+        }
+
+        if(!$input->getOptions('drop-database')) {
+            $fixtureLoad = new ArrayInput(array(
+                'command' => 'doctrine:fixture:load',
+            ));
+            $application->run($fixtureLoad, $output);
         }
 
     }
