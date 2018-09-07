@@ -107,6 +107,12 @@ class InstallCommand extends Command
             $application->run($fixtureLoad, $output);
         }
 
+        /* Give write authorization in the project */
+        if(!$input->getOption('skip-chmod')) {
+            $chmod = new Process('chmod -R 777 *');
+            $chmod->run();
+            $this->forceProcessToBeSync($chmod);
+        }
     }
 
     public function forceProcessToBeSync(Process $process)

@@ -91,7 +91,7 @@ vich_uploader:
     db_driver: orm
     mappings:
         file:
-            uri_prefix: /uploads/file/
+            uri_prefix: /uploads/file
             upload_destination: '%upload.file.directory%'
             namer: vich_uploader.namer_uniqid
 
