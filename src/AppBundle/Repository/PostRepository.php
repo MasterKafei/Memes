@@ -117,11 +117,13 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()->getResult();
     }
 
-    public function getRandomPost($number = 1)
+    public function getRandomPost($number = 1, $avoids = array())
     {
         $ids = $this->createQueryBuilder('post')
             ->select('post.id')
             ->where('post.published = 1')
+            ->andWhere('post.id NOT IN (:avoids)')
+            ->setParameter('avoids', $avoids)
             ->getQuery()
             ->getResult()
         ;
@@ -129,7 +131,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
         shuffle($ids);
         if(count($ids) > $number)
         {
-            array_slice($ids, $number);
+            $ids = array_slice($ids,0, $number);
         }
 
         $posts = $this->createQueryBuilder('post')

@@ -30,6 +30,7 @@ class InstallCommand extends Command
             ->addOption('skip-composer', null, InputOption::VALUE_NONE, 'If you don\'t want to do the composer install')
             ->addOption('git-pull', null, InputOption::VALUE_NONE, 'If you want to reset code from the branch master')
             ->addOption('skip-chmod', null, InputOption::VALUE_NONE, 'If you don\'t want to update folder rights')
+            ->addOption('skip-assets', null, InputOption::VALUE_NONE, 'If you don\'t want to rebuild assets files')
             ->addOption('skip-schema-update', null, InputOption::VALUE_NONE, 'If you don\'t want to update database schema');
     }
 
@@ -59,6 +60,14 @@ class InstallCommand extends Command
             $chmod = new Process('chmod -R 777 *');
             $chmod->run();
             $this->forceProcessToBeSync($chmod);
+        }
+
+        /* Generate build asset with yarn encore */
+        if($input->getOptions('skip-assets'))
+        {
+            $yarnEncore = new Process('yarn run encore dev');
+            $yarnEncore->run();
+            $this->forceProcessToBeSync($yarnEncore);
         }
 
 

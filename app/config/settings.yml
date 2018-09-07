@@ -7,4 +7,4 @@ parameters:
         help_address: help@memes.com
     achievement.image.directory.web: 'achievement/image/'
     achievement.image.directory: '%kernel.project_dir%/web/%achievement.image.directory.web%'
-    upload.file.directory: '%kernel.project_dir%/web/uploads/file/'
+    upload.file.directory: '%kernel.project_dir%/web/uploads/file'
