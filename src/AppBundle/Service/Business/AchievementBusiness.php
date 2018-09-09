@@ -3,110 +3,16 @@
 namespace AppBundle\Service\Business;
 
 use AppBundle\Entity\Achievement;
+use AppBundle\Entity\AchievementModel;
 use AppBundle\Service\Util\AbstractContainerAware;
 use AppBundle\Service\Validator\Achievement\AchievementValidator;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Yaml\Yaml;
 
 class AchievementBusiness extends AbstractContainerAware
 {
-    const LIKE_VOTE_TYPE = 'like_vote';
-    const FAVORITE_VOTE_TYPE = 'favorite_vote';
-
-    private $achievementsYamlPath;
-
-    private $defaults = array(
-        'name' => 'Untitled',
-        'description' => 'No description',
-        'image' => null,
-        'reward' => array(
-            'xp' => 0,
-        ),
-    );
-
-    public function __construct()
-    {
-        $this->achievementsYamlPath = '@AppBundle/Resources/config/achievements/all.yml';
-    }
-
-    /**
-     * Get achievement by identifier correctly loaded
-     *
-     * @param $identifier
-     * @return Achievement
-     */
-    public function getAchievement($identifier)
-    {
-        $achievement = new Achievement($identifier);
-
-        $optionResolver = new OptionsResolver();
-        $optionResolver->setDefaults($this->defaults);
-
-        $achievementArray = $this->getAchievementConfigByIdentifier($identifier);
-        $option = $optionResolver->resolve($achievementArray);
-
-        $achievement
-            ->setName($option['name'])
-            ->setDescription($option['description'])
-            ->setImagePath($option['image'])
-            ->setXp($option['reward']['xp']);
-
-        return $achievement;
-    }
-
-    private function getAchievementsYaml()
-    {
-        return Yaml::parseFile($this->getRealPath($this->achievementsYamlPath));
-    }
-
-    /**
-     * Get achievement yaml array
-     *
-     * @param $identifier
-     * @return null
-     */
-    private function getAchievementYaml($identifier)
-    {
-        $achievements = $this->getAchievementsYaml();
-
-        foreach ($achievements as $achievement) {
-            if (intval($achievement['identifier']) == $identifier) {
-                return $achievement;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Get achievement configuration array
-     *
-     * @param int $identifier
-     * @return array
-     */
-    private function getAchievementConfigByIdentifier($identifier)
-    {
-        $achievement = $this->getAchievementYaml($identifier);
-
-        if (null === $achievement) {
-            return null;
-        }
-
-        return Yaml::parseFile($this->getRealPath($achievement['config']));
-    }
-
-    /**
-     * Get real path of resource by namespace
-     *
-     * @param string $path
-     * @return string
-     */
-    private function getRealPath($path)
-    {
-        return $this->container->get('file_locator')->locate($path);
-    }
-
     /**
      * Check if current user respect achievement by validator type
      * Mostly used by Achievement Listeners
@@ -115,15 +21,15 @@ class AchievementBusiness extends AbstractContainerAware
      */
     public function checkAchievementByType($type)
     {
-        $achievementsToCheck = $this->getAchievementByValidatorType($type);
+        $modelsToCheck = $this->getAchievementByValidatorType($type);
 
-        foreach ($achievementsToCheck as $achievementToCheck) {
-            if ($this->doesUserHaveAchievement($achievementToCheck['identifier'])) {
+        foreach ($modelsToCheck as $model) {
+            if ($this->doesUserHaveAchievement($model)) {
                 continue;
             }
 
-            if ($this->isAchievementValidatorsRespected($achievementToCheck)) {
-                $this->giveUserAchievement($achievementToCheck);
+            if ($this->isAchievementValidatorsRespected($model)) {
+                $this->giveUserAchievement($model);
             }
         }
     }
@@ -132,18 +38,19 @@ class AchievementBusiness extends AbstractContainerAware
      * Get achievement by the type of the validator
      * Mostly used by Achievement Listeners
      *
-     * @param $type
-     * @return array
+     * @param string $type
+     * @return AchievementModel[]
      */
     private function getAchievementByValidatorType($type)
     {
-        $allAchievements = $this->getAchievementsYaml();
+        /** @var AchievementModel[] $achievementModels */
+        $achievementModels = $this->container->get('doctrine')->getRepository(AchievementModel::class)->findAll();
         $achievements = array();
 
-        foreach ($allAchievements as $achievement) {
-            foreach ($achievement['validators'] as $service => $config) {
-                if ($this->container->get($service)->getType() == $type) {
-                    $achievements[] = $achievement;
+        foreach ($achievementModels as $model) {
+            foreach ($model->getValidators() as $validator) {
+                if ($this->container->get($validator->getService())->getType() == $type) {
+                    $achievements[] = $model;
                     break;
                 }
             }
@@ -155,17 +62,16 @@ class AchievementBusiness extends AbstractContainerAware
     /**
      * Check if user already have the achievement
      *
-     * @param int $identifier
+     * @param AchievementModel $model
      * @return bool
      */
-    private function doesUserHaveAchievement($identifier)
+    private function doesUserHaveAchievement(AchievementModel $model)
     {
         $user = $this->container->get('app.business.user')->loadUser();
 
-        $achievements = $user->getAchievements();
-
-        foreach ($achievements as $achievement) {
-            if ($achievement->getIdentifier() == $identifier) {
+        foreach($user->getAchievements() as $achievement)
+        {
+            if($achievement->getModel()->getId() === $model->getId()) {
                 return true;
             }
         }
@@ -176,36 +82,37 @@ class AchievementBusiness extends AbstractContainerAware
     /**
      * Give achievement to the current user without regarding validators
      *
-     * @param $achievementYaml
+     * @param AchievementModel $model
      */
-    public function giveUserAchievement($achievementYaml)
+    public function giveUserAchievement(AchievementModel $model)
     {
-        if ($this->doesUserHaveAchievement($achievementYaml)) {
+        if ($this->doesUserHaveAchievement($model)) {
             return;
         }
 
-        $achievement = new Achievement($achievementYaml['identifier']);
+        $achievement = new Achievement();
         $user = $this->container->get('app.business.user')->loadUser();
         $user->addAchievement($achievement);
-        $this->container->get('app.socket.achievement')->sendAchievementNotification($achievement->getIdentifier());
+        $achievement->setModel($model);
+        $this->container->get('app.socket.achievement')->sendAchievementNotification($model);
         $this->container->get('app.business.user')->saveUser($user);
     }
 
     /**
      * Check if current user respect achievement conditions
      *
-     * @param array $achievement
+     * @param AchievementModel $model
      * @return bool
      */
-    public function isAchievementValidatorsRespected($achievement)
+    public function isAchievementValidatorsRespected($model)
     {
         $isValid = true;
-        $validators = $achievement['validators'];
-        foreach ($validators as $service => $config) {
+        $validators = $model->getValidators();
+        foreach ($validators as $validator) {
 
             /** @var AchievementValidator $service */
-            $service = $this->container->get($service);
-            if (!$service->isValid($config['parameters'])) {
+            $service = $this->container->get($validator->getService());
+            if (!$service->isValid($validator->getParameters())) {
                 $isValid = false;
                 break;
             }
@@ -217,68 +124,32 @@ class AchievementBusiness extends AbstractContainerAware
     /**
      * Get current user achievements correctly loaded
      *
-     * @return Achievement[]
+     * @return AchievementModel[]
      */
     public function getUserAchievements()
     {
         $user = $this->container->get('app.business.user')->loadUser();
-        $achievements = array();
 
-        foreach ($user->getAchievements() as $achievement) {
-            $achievements[] = $this->getAchievement($achievement->getIdentifier());
+        $achievements = $user->getAchievements();
+
+        if($achievements instanceof PersistentCollection) {
+            $achievements = $achievements->getValues();
         }
 
-        return $achievements;
+        return array_map(function(Achievement $achievement){
+            return $achievement->getModel();
+        }, $achievements);
     }
 
-    public function saveAchievement(Achievement $achievement)
+    public function getAchievementImageAssetPath(AchievementModel $model)
     {
-        $achievementYaml = $this->getAchievementYaml($achievement->getIdentifier());
-        $configPath = $this->getRealPath($achievementYaml['config']);
-        $image = $achievement->getImage();
-
-        if(null !== $image) {
-            $imagePath = $this->saveAchievementImage($image);
-            $achievement->setImagePath($imagePath);
-        }
-
-        $yaml = Yaml::dump($this->achievementToArray($achievement));
-        file_put_contents($configPath, $yaml);
+        return null;
     }
 
-    private function achievementToArray(Achievement $achievement)
+    public function getRenderedAchievement(AchievementModel $model)
     {
-        return array(
-            'name' => $achievement->getName(),
-            'description' => $achievement->getDescription(),
-            'image' => $achievement->getImagePath(),
-            'reward' => array(
-                'xp' => $achievement->getXp(),
-            )
-        );
-    }
-
-    private function saveAchievementImage(UploadedFile $image)
-    {
-        $fileName = md5(uniqid()) . '.' . $image->guessExtension();
-
-        $image->move($this->container->getParameter('achievement.image.directory'), $fileName);
-
-        return $fileName;
-    }
-
-    public function getAchievementImageAssetPath(Achievement $achievement)
-    {
-        return $this->container->getParameter('achievement.image.directory.web') . $achievement->getImagePath();
-    }
-
-    private function getAchievementTemplate($identifier)
-    {
-        return $this->getAchievementYaml($identifier)['template'];
-    }
-
-    public function getRenderedAchievement($identifier)
-    {
-        return $this->container->get('templating')->render($this->getAchievementTemplate($identifier), array('achievement' => $this->getAchievement($identifier)));
+        return $this->container->get('templating')->render('@Layout/Widget/Achievement/Default/base.html.twig', array(
+            'achievement' => $model,
+        ));
     }
 }

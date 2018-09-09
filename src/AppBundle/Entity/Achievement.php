@@ -2,8 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 /**
  * Achievement
  */
@@ -15,44 +13,14 @@ class Achievement
     private $id;
 
     /**
-     * @var int
-     */
-    private $identifier;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @var UploadedFile
-     */
-    private $image;
-
-    /**
-     * @var string
-     */
-    private $imagePath;
-
-    /**
-     * @var int
-     */
-    private $xp;
-
-    /**
      * @var User
      */
     private $user;
 
-    public function __construct($identifier)
-    {
-        $this->identifier = $identifier;
-    }
+    /**
+     * @var AchievementModel
+     */
+    private $model;
 
     /**
      * Get id.
@@ -65,34 +33,11 @@ class Achievement
     }
 
     /**
-     * Set identifier.
-     *
-     * @param int $identifier
-     *
-     * @return Achievement
-     */
-    public function setIdentifier($identifier)
-    {
-        $this->identifier = $identifier;
-
-        return $this;
-    }
-
-    /**
-     * Get identifier.
-     *
-     * @return int
-     */
-    public function getIdentifier()
-    {
-        return $this->identifier;
-    }
-
-    /**
      * Set user.
      *
-     * @param $user
-     * @return $this
+     * @param User $user
+     *
+     * @return Achievement
      */
     public function setUser($user)
     {
@@ -112,119 +57,26 @@ class Achievement
     }
 
     /**
-     * Get name.
+     * Set model.
      *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set name.
-     *
-     * @param string $name
+     * @param AchievementModel $model
      *
      * @return Achievement
      */
-    public function setName($name)
+    public function setModel($model)
     {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * Get description.
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set description.
-     *
-     * @param string $description
-     *
-     * @return Achievement
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-        return $this;
-    }
-
-    /**
-     * Get image.
-     *
-     * @return UploadedFile
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set image.
-     *
-     * @param UploadedFile $image
-     *
-     * @return Achievement
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-        return $this;
-    }
-
-    /**
-     * Get imagePath.
-     *
-     * @return string
-     */
-    public function getImagePath()
-    {
-        return $this->imagePath;
-    }
-
-    /**
-     * Set imagePath.
-     *
-     * @param string $imagePath
-     *
-     * @return Achievement
-     */
-    public function setImagePath($imagePath)
-    {
-        $this->imagePath = $imagePath;
+        $this->model = $model;
 
         return $this;
     }
 
     /**
-     * Get xp.
+     * Get model.
      *
-     * @return int
+     * @return AchievementModel
      */
-    public function getXp()
+    public function getModel()
     {
-        return $this->xp;
-    }
-
-    /**
-     * Set xp.
-     *
-     * @param int $xp
-     *
-     * @return Achievement
-     */
-    public function setXp($xp)
-    {
-        $this->xp = $xp;
-
-        return $this;
+        return $this->model;
     }
 }

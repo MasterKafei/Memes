@@ -1,0 +1,17 @@
+AppBundle\Entity\Validator:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ValidatorRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        service:
+            type: string
+            length: 255
+        parameters:
+            type: json_array
+    lifecycleCallbacks: {  }

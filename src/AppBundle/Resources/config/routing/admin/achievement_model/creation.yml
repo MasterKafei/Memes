@@ -1,0 +1,15 @@
+app_admin_achievement_model_creation_create_achievement_model:
+    path:   /create_achievement_model/
+    defaults: { _controller: 'AppBundle:Admin\AchievementModel\Creation:createAchievementModel' }
+
+app_admin_achievement_model_creation_create_reward:
+    path:   /create_reward/{id}
+    defaults: { _controller: 'AppBundle:Admin\AchievementModel\Creation:createReward' }
+    requirements:
+        id: \d+
+
+app_admin_achievement_model_creation_create_validators:
+    path:   /create_validators/{id}
+    defaults: { _controller: 'AppBundle:Admin\AchievementModel\Creation:createValidators' }
+    requirements:
+        id: \d+

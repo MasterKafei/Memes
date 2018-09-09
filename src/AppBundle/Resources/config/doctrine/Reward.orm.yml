@@ -1,0 +1,30 @@
+AppBundle\Entity\Reward:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\RewardRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        xp:
+            type: integer
+            nullable: true
+    manyToMany:
+        avatars:
+            targetEntity: AppBundle\Entity\AvatarModel
+            cascade: [ persist ]
+            joinTable:
+                name: rewards_avatars
+                joinColumns:
+                    joinColumn:
+                        name: avatar_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    joinColumn:
+                        name: reward_id
+                        referencedColumnName: id
+                        unique: true
+    lifecycleCallbacks: {  }

@@ -47,6 +47,7 @@ AppBundle\Entity\User:
             targetEntity: AppBundle\Entity\Achievement
             cascade: [ persist, remove ]
             mappedBy: user
-            joinColumn:
-                name: achievement_id
-                referencedColumnName: id
+        avatars:
+            targetEntity: AppBundle\Entity\Avatar
+            cascade: [ persist, remove ]
+            mappedBy: user

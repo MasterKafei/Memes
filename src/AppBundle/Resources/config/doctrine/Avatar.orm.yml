@@ -1,7 +1,7 @@
-AppBundle\Entity\Achievement:
+AppBundle\Entity\Avatar:
     type: entity
     table: null
-    repositoryClass: AppBundle\Repository\AchievementRepository
+    repositoryClass: AppBundle\Repository\AvatarRepository
     id:
         id:
             type: integer
@@ -11,12 +11,14 @@ AppBundle\Entity\Achievement:
     manyToOne:
         user:
             targetEntity: AppBundle\Entity\User
-            inversedBy: achievements
+            cascade: [ persist ]
+            mappedBy: avatars
             joinColumn:
                 name: user_id
                 referencedColumnName: id
         model:
-            targetEntity: AppBundle\Entity\AchievementModel
+            targetEntity: AppBundle\Entity\AvatarModel
+            cascade: [ persist ]
             joinColumn:
                 name: model_id
                 referencedColumnName: id

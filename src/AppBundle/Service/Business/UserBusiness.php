@@ -214,7 +214,7 @@ class UserBusiness extends AbstractContainerAware
         $achievements = $this->container->get('app.business.achievement')->getUserAchievements();
         $xp = 0;
         foreach ($achievements as $achievement) {
-            $xp += $achievement->getXp();
+            $xp += $achievement->getReward()->getXp();
         }
 
         return $xp;

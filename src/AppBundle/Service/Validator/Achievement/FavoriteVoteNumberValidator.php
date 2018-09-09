@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service\Validator\Achievement;
 
+use AppBundle\Entity\Validator;
 use AppBundle\Service\Business\AchievementBusiness;
 use AppBundle\Service\Util\AbstractContainerAware;
 
@@ -17,6 +18,6 @@ class FavoriteVoteNumberValidator extends AbstractContainerAware implements Achi
 
     public function getType()
     {
-        return AchievementBusiness::FAVORITE_VOTE_TYPE;
+        return Validator::FAVORITE_VOTE_TYPE;
     }
 }

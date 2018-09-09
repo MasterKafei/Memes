@@ -1,0 +1,10 @@
+{% block app_form_type_avatar_models_widget %}
+    {% for child in form %}
+        {% set index = child.vars.value %}
+        {% set avatar = form.vars.choices[index].data %}
+        <div>
+            <label for="something"><img src="{{ vich_uploader_asset(avatar.image.file, 'file') }}" /></label>
+            {{ form_widget(child) }}
+        </div>
+    {% endfor %}
+{% endblock %}

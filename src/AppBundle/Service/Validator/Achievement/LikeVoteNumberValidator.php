@@ -2,7 +2,7 @@
 
 namespace AppBundle\Service\Validator\Achievement;
 
-use AppBundle\Service\Business\AchievementBusiness;
+use AppBundle\Entity\Validator;
 use AppBundle\Service\Util\AbstractContainerAware;
 
 class LikeVoteNumberValidator extends AbstractContainerAware implements AchievementValidator
@@ -17,6 +17,6 @@ class LikeVoteNumberValidator extends AbstractContainerAware implements Achievem
 
     public function getType()
     {
-        return AchievementBusiness::LIKE_VOTE_TYPE;
+        return Validator::LIKE_VOTE_TYPE;
     }
 }

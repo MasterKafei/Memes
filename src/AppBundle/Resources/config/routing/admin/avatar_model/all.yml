@@ -1,0 +1,3 @@
+app_admin_avatar_model_creation:
+    resource: "creation.yml"
+    prefix:   /creation/

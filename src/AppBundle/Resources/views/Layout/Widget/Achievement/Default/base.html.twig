@@ -1,7 +1,8 @@
 <div class="achievement-wrapper achievement-wrapper-notification achievement-lock achievement-unlocked">
     <div class="achievement-image-wrapper">
         <div class="achievement-image-border">
-            <div class="achievement-image" style="background-image: url('{{ asset(achievement_business.achievementImageAssetPath(achievement)) }}');">
+            <div class="achievement-image"
+                 style="background-image: url('{{ vich_uploader_asset(achievement.image.file, 'file') }}');">
                 <i class="fas fa-lock fa-fw fa-3x"></i>
             </div>
         </div>
@@ -14,8 +15,8 @@
             <span>{{ achievement.description }}</span>
         </div>
         <div class="achievement-reward">
-            <small>Reward: </small>
-            <small>{{ achievement.xp }} xp</small>
+            <small>Reward:</small>
+            <small>{{ achievement.reward.xp }} xp</small>
         </div>
     </div>
 </div>

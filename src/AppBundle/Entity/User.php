@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface
@@ -69,6 +70,11 @@ class User implements UserInterface
      * @var Achievement[]
      */
     private $achievements;
+
+    /**
+     * @var Avatar[]
+     */
+    private $avatars;
 
     /**
      * @var string
@@ -368,6 +374,43 @@ class User implements UserInterface
     public function addAchievement(Achievement $achievement)
     {
         $this->achievements[] = $achievement;
+
+        return $this;
+    }
+
+    /**
+     * Get avatars.
+     *
+     * @return Avatar[]
+     */
+    public function getAvatars()
+    {
+        return $this->avatars;
+    }
+
+    /**
+     * Set avatars.
+     *
+     * @param Avatar[] $avatars
+     *
+     * @return User
+     */
+    public function setAvatars($avatars)
+    {
+        $this->avatars = $avatars;
+
+        return $this;
+    }
+
+    /**
+     * Add avatar.
+     *
+     * @param $avatar
+     * @return $this
+     */
+    public function addAvatar($avatar)
+    {
+        $this->avatars[] = $avatar;
 
         return $this;
     }

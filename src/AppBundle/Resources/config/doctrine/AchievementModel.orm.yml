@@ -1,0 +1,42 @@
+AppBundle\Entity\AchievementModel:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\AchievementModelRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: true
+        description:
+            type: string
+            length: 255
+            nullable: true
+    oneToOne:
+        image:
+            targetEntity: AppBundle\Entity\Image
+            cascade: [ persist, remove ]
+        reward:
+            targetEntity: AppBundle\Entity\Reward
+            cascade: [ persist, remove ]
+    manyToMany:
+        validators:
+            targetEntity: AppBundle\Entity\Validator
+            cascade: [ persist ]
+            joinTable:
+                name: achievements_models_validators
+                joinColumns:
+                    joinColumn:
+                        name: validator_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    joinColumn:
+                        name: achievement_model_id
+                        referencedColumnName: id
+                        unique: true
+    lifecycleCallbacks: {  }

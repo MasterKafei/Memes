@@ -1,0 +1,15 @@
+AppBundle\Entity\AvatarModel:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\AvatarModelRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    oneToOne:
+        image:
+            targetEntity: AppBundle\Entity\Image
+            cascade: [ persist, remove ]
+    lifecycleCallbacks: {  }

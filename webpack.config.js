@@ -10,6 +10,7 @@ Encore
     // will create web/build/app.js and web/build/app.css
     .addEntry('app', './src/AppBundle/Resources/assets/app.js')
     .addEntry('js/Post/Listing/list', './src/AppBundle/Resources/assets/js/Post/Listing/list.js')
+    .addEntry('js/Admin/AchievementModel/Creation/create_validators', './src/AppBundle/Resources/assets/js/Admin/AchievementModel/Creation/create_validators.js')
 
     // allow legacy applications to use $/jQuery as a global variable
     .autoProvidejQuery()
@@ -23,10 +24,10 @@ Encore
     // show OS notifications when builds finish/fail
     .enableBuildNotifications()
 
-// create hashed filenames (e.g. app.abc123.css)
-// .enableVersioning()
+    // create hashed filenames (e.g. app.abc123.css)
+    // .enableVersioning()
 
-// allow sass/scss files to be processed
+    // allow sass/scss files to be processed
     .enableSassLoader()
 ;
 

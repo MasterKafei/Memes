@@ -2,7 +2,15 @@ app_admin_achievement:
     resource: "achievement/all.yml"
     prefix:   /achievement/
 
-app_admin_creation:
+app_admin_achievement_model:
+    resource: "achievement_model/all.yml"
+    prefix:   /achievement_model/
+
+app_admin_avatar_model:
+    resource: "avatar_model/all.yml"
+    prefix:   /avatar_model/
+
+app_admin_post:
     resource: "post/all.yml"
     prefix:   /post/
 
